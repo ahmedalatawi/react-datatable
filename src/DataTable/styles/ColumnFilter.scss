@@ -1,0 +1,65 @@
+.column-filter {
+  @apply relative inline-block ml-2;
+
+  .filter-button {
+    @apply p-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 
+           focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-150;
+
+    &.active {
+      @apply bg-blue-50 text-blue-600;
+    }
+
+    .filter-icon {
+      @apply transition-colors duration-150;
+
+      &.active {
+        @apply text-blue-600;
+      }
+    }
+  }
+
+  .filter-overlay {
+    @apply fixed inset-0 z-30;
+  }
+
+  .filter-dropdown {
+    @apply absolute right-0 mt-2 w-64 rounded-md shadow-lg bg-white 
+           ring-1 ring-black ring-opacity-5 z-40;
+
+    .filter-content {
+      @apply p-4 space-y-3;
+
+      .operator-select,
+      .filter-select {
+        @apply block w-full rounded-md border-gray-300 shadow-sm 
+               focus:border-blue-300 focus:ring focus:ring-blue-200 
+               focus:ring-opacity-50 text-sm;
+      }
+
+      .filter-input {
+        @apply block w-full rounded-md border-gray-300 shadow-sm 
+               focus:border-blue-300 focus:ring focus:ring-blue-200 
+               focus:ring-opacity-50 text-sm;
+      }
+
+      .filter-actions {
+        @apply flex justify-end space-x-2 pt-2;
+
+        button {
+          @apply px-3 py-1 rounded-md text-sm font-medium focus:outline-none 
+                 focus:ring-2 focus:ring-offset-2 transition-colors duration-150;
+        }
+
+        .apply-button {
+          @apply bg-blue-600 text-white hover:bg-blue-700 
+                 focus:ring-blue-500;
+        }
+
+        .clear-button {
+          @apply bg-white text-gray-700 border border-gray-300 
+                 hover:bg-gray-50 focus:ring-blue-500;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.export-menu-container {
+  @apply relative inline-block;
+
+  .export-button {
+    @apply inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm
+           font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+           transition-colors duration-150;
+
+    .arrow-icon {
+      @apply ml-2 transition-transform duration-150;
+
+      &.open {
+        @apply transform rotate-180;
+      }
+    }
+  }
+
+  .export-menu-overlay {
+    @apply fixed inset-0 z-30;
+  }
+
+  .export-menu {
+    @apply absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-40;
+
+    .export-option {
+      @apply block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
+             focus:outline-none focus:bg-gray-100 transition-colors duration-150;
+
+      &:first-child {
+        @apply rounded-t-md;
+      }
+
+      &:last-child {
+        @apply rounded-b-md;
+      }
+    }
+  }
+}
