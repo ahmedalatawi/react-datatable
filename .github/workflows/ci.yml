@@ -26,18 +26,18 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run tests
-        # run: yarn test
+      # - name: Run tests
+      # run: yarn test
 
-      - name: Run lint
-        # run: yarn lint
+      # - name: Run lint
+      # run: yarn lint
 
-      - name: Run tests coverage
-        # run: yarn test:coverage
+      # - name: Run tests coverage
+      # run: yarn test:coverage
 
-      - name: Upload coverage reports
-        # uses: codecov/codecov-action@v4
-        # with:
-        #   token: ${{ secrets.CODECOV_TOKEN }}
-        #   fail_ci_if_error: true
-        #   verbose: true
+      # - name: Upload coverage reports
+      # uses: codecov/codecov-action@v4
+      # with:
+      #   token: ${{ secrets.CODECOV_TOKEN }}
+      #   fail_ci_if_error: true
+      #   verbose: true
