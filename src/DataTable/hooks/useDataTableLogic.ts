@@ -26,7 +26,6 @@ export function useDataTableLogic<T extends { id: string | number }>(
   const filteredData = useMemo(() => {
     let result = [...data];
 
-    // Apply filters
     if (filters.size > 0) {
       result = result.filter((item) => {
         return Array.from(filters.values()).every((filter) => {
@@ -56,7 +55,6 @@ export function useDataTableLogic<T extends { id: string | number }>(
       });
     }
 
-    // Apply search
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
       result = result.filter((item) => {
