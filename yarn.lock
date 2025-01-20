@@ -5499,12 +5499,11 @@ handlebars@^4.7.7:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-happy-dom@^13.3.8:
-  version "13.10.1"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-13.10.1.tgz#bfaf147704055e7c2feb4069adc899a838588307"
-  integrity sha512-9GZLEFvQL5EgfJX2zcBgu1nsPUn98JF/EiJnSfQbdxI6YEQGqpd09lXXxOmYonRBIEFz9JlGCOiPflDzgS1p8w==
+happy-dom@^16.7.0:
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-16.7.0.tgz#aea5ac9499f0203b8ceb3431b6794ac4176a8d3c"
+  integrity sha512-vxjSgX/beuuVfuhEfxFfnOyYg4mLQHHomzVNumYyVqI23IMyjYI7RtmIFr9xnWiWyR2m7TS2BXa5Vht+J76VHQ==
   dependencies:
-    entities "^4.5.0"
     webidl-conversions "^7.0.0"
     whatwg-mimetype "^3.0.0"
 
