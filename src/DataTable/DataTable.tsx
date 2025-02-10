@@ -94,6 +94,14 @@ export function DataTable<T extends { id: string | number }>({
     }
   );
 
+  const handleSearchChange = useCallback(
+    (term: string) => {
+      handleSearch(term);
+      setCurrentPage(1);
+    },
+    [handleSearch, setCurrentPage]
+  );
+
   const Row = useCallback(
     ({ index, style }: { index: number; style: React.CSSProperties }) => {
       const item = displayData[index];
@@ -129,14 +137,21 @@ export function DataTable<T extends { id: string | number }>({
     },
     [
       displayData,
-      expandedRows,
-      selectedRows,
-      columns,
-      expandedContent,
-      selectable,
       expandable,
+      expandedRows,
+      selectable,
+      selectedRows,
+      cellClassName,
+      theme?.cell,
+      theme?.row,
+      columns,
       onRowClick,
-      theme,
+      expandedContent,
+      rowClassName,
+      handleSelectRow,
+      toggleExpandRow,
+      handleRowClick,
+      handleKeyPress,
     ]
   );
 
@@ -154,7 +169,7 @@ export function DataTable<T extends { id: string | number }>({
           {searchable && (
             <SearchBar
               value={searchTerm}
-              onChange={handleSearch}
+              onChange={handleSearchChange}
               placeholder={searchPlaceholder}
               theme={theme?.searchBar}
             />
