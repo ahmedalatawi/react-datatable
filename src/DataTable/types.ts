@@ -26,6 +26,8 @@ export interface DataTableProps<T> {
   expandedContent?: (item: T) => ReactNode;
   onSelectionChange?: (selectedItems: T[]) => void;
   onRowClick?: (item: T) => void;
+  onPageChange?: (page: number) => void;
+  onSearchTextChange?: (searchText: string) => void;
   theme?: DataTableTheme;
   sortable?: boolean;
   defaultSortColumn?: keyof T;

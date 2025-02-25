@@ -150,6 +150,10 @@ function App() {
               expandable={true}
               expandedContent={expandedContent}
               onSelectionChange={handleSelectionChange}
+              onPageChange={(page) => console.log("Page changed:", page)}
+              onSearchTextChange={(searchText) =>
+                console.log("Search text changed:", searchText)
+              }
               defaultSortColumn="name"
               defaultSortDirection="asc"
               stickyHeader={stickyHeader}
@@ -176,6 +180,7 @@ function App() {
               selectable={true}
               expandable={false}
               onSelectionChange={handleSelectionChange}
+              onPageChange={(page) => console.log("Page changed:", page)}
               defaultSortColumn="name"
               defaultSortDirection="asc"
               stickyHeader={stickyHeader}

@@ -31,6 +31,8 @@ export function DataTable<T extends { id: string | number }>({
   expandedContent,
   onSelectionChange,
   onRowClick,
+  onPageChange,
+  onSearchTextChange,
   theme = {},
   sortable = true,
   defaultSortColumn,
@@ -94,12 +96,21 @@ export function DataTable<T extends { id: string | number }>({
     }
   );
 
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      onPageChange?.(page);
+    },
+    [onPageChange, setCurrentPage]
+  );
+
   const handleSearchChange = useCallback(
     (term: string) => {
       handleSearch(term);
       setCurrentPage(1);
+      onSearchTextChange?.(term);
     },
-    [handleSearch, setCurrentPage]
+    [handleSearch, onSearchTextChange, setCurrentPage]
   );
 
   const Row = useCallback(
@@ -242,7 +253,7 @@ export function DataTable<T extends { id: string | number }>({
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={setCurrentPage}
+            onPageChange={handlePageChange}
             theme={theme?.pagination}
           />
         </div>
