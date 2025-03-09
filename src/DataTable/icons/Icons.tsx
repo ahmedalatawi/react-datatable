@@ -1,11 +1,35 @@
-import { FC } from "react";
+import React from "react";
 
 interface IconProps {
   size?: number;
   className?: string;
 }
 
-export const ChevronDown: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const SearchIcon: React.FC<IconProps> = ({
+  size = 18,
+  className = "",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+
+export const ChevronDown: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -21,7 +45,10 @@ export const ChevronDown: FC<IconProps> = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const ChevronUp: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const ChevronUp: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -37,7 +64,10 @@ export const ChevronUp: FC<IconProps> = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const ChevronLeft: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const ChevronLeft: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -53,7 +83,10 @@ export const ChevronLeft: FC<IconProps> = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const ChevronRight: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const ChevronRight: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -69,7 +102,10 @@ export const ChevronRight: FC<IconProps> = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const ChevronsLeft: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const ChevronsLeft: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -86,7 +122,10 @@ export const ChevronsLeft: FC<IconProps> = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export const ChevronsRight: FC<IconProps> = ({ size = 24, className = "" }) => (
+export const ChevronsRight: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
   <svg
     width={size}
     height={size}
@@ -100,22 +139,5 @@ export const ChevronsRight: FC<IconProps> = ({ size = 24, className = "" }) => (
   >
     <polyline points="13 17 18 12 13 7" />
     <polyline points="6 17 11 12 6 7" />
-  </svg>
-);
-
-export const SearchIcon: FC<IconProps> = ({ size = 24, className = "" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <circle cx="11" cy="11" r="8" />
-    <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );

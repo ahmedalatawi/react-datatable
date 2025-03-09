@@ -1,5 +1,4 @@
 import { SearchIcon } from "../icons/Icons";
-
 import "../styles/SearchBar.scss";
 
 interface SearchBarProps {
@@ -12,13 +11,15 @@ interface SearchBarProps {
 export function SearchBar({
   value,
   onChange,
-  theme = "",
   placeholder = "Search...",
+  theme,
 }: SearchBarProps) {
   return (
-    <div className={`datatable-search ${theme}`}>
+    <div className={`datatable-search ${theme || ""}`}>
       <div className="search-wrapper">
-        <SearchIcon className="search-icon" size={18} />
+        <span className="search-icon" aria-hidden="true">
+          <SearchIcon />
+        </span>
         <input
           type="text"
           placeholder={placeholder}

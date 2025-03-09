@@ -5,7 +5,12 @@
     @apply relative flex-1 max-w-md;
 
     .search-icon {
-      @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none;
+      @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none;
+      height: 18px;
+      width: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .search-input {
@@ -16,6 +21,10 @@
 
       &:hover {
         @apply border-gray-300;
+      }
+
+      &:focus {
+        @apply bg-white;
       }
     }
   }
