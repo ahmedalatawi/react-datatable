@@ -3,7 +3,8 @@ import { Filter } from "../types";
 
 export function useDataTableLogic<T extends { id: string | number }>(
   data: T[],
-  searchableKeys: (keyof T)[]
+  searchableKeys: (keyof T)[],
+  disableInternalSearch: boolean = false
 ) {
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedRows, setExpandedRows] = useState<Set<T["id"]>>(new Set());
@@ -55,7 +56,7 @@ export function useDataTableLogic<T extends { id: string | number }>(
       });
     }
 
-    if (searchTerm) {
+    if (searchTerm && !disableInternalSearch) {
       const searchLower = searchTerm.toLowerCase();
       result = result.filter((item) => {
         return searchableKeys.some((key) => {
@@ -67,7 +68,7 @@ export function useDataTableLogic<T extends { id: string | number }>(
     }
 
     return result;
-  }, [data, searchTerm, filters, searchableKeys]);
+  }, [data, filters, searchTerm, disableInternalSearch, searchableKeys]);
 
   const handleSearch = useCallback((value: string) => {
     setSearchTerm(value);

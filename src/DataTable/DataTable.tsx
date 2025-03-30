@@ -50,6 +50,7 @@ export function DataTable<T extends { id: string | number }>({
   searchPlaceholder = "Search...",
   exportable = true,
   exportFilename = "table-data",
+  disableInternalSearch = false,
 }: DataTableProps<T>) {
   const { sortConfig, handleSort, sortedData } = useSorting(
     data,
@@ -71,7 +72,8 @@ export function DataTable<T extends { id: string | number }>({
     sortedData,
     searchable
       ? columns.filter((col) => col.searchable).map((col) => col.key)
-      : []
+      : [],
+    disableInternalSearch
   );
 
   const { currentPage, setCurrentPage, totalPages, paginatedData } =

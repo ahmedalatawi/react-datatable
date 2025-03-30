@@ -45,6 +45,7 @@ export interface DataTableProps<T> {
   searchPlaceholder?: string;
   exportable?: boolean;
   exportFilename?: string;
+  disableInternalSearch?: boolean;
 }
 
 export interface DataTableTheme {

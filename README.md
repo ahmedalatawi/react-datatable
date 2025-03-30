@@ -116,26 +116,27 @@ function App() {
 
 ### DataTable Props
 
-| Prop                 | Type                              | Default              | Description                 |
-| -------------------- | --------------------------------- | -------------------- | --------------------------- |
-| `data`               | `T[]`                             | Required             | Array of data items         |
-| `columns`            | `Column<T>[]`                     | Required             | Array of column definitions |
-| `pageSize`           | `number`                          | `10`                 | Number of items per page    |
-| `selectable`         | `boolean`                         | `true`               | Enable row selection        |
-| `expandable`         | `boolean`                         | `false`              | Enable row expansion        |
-| `stickyHeader`       | `boolean`                         | `true`               | Make header stick to top    |
-| `loading`            | `boolean`                         | `false`              | Show loading state          |
-| `pagination`         | `boolean`                         | `true`               | Enable pagination           |
-| `searchable`         | `boolean`                         | `true`               | Show search box             |
-| `exportable`         | `boolean`                         | `true`               | Show export options         |
-| `theme`              | `DataTableTheme`                  | `undefined`          | Custom theme object         |
-| `onSelectionChange`  | `(items: T[]) => void`            | `undefined`          | Selection callback          |
-| `onRowClick`         | `(item: T) => void`               | `undefined`          | Row click callback          |
-| `onPageChange`       | `(page: number) => void`          | `undefined`          | Page number change callback |
-| `onSearchTextChange` | `(text: string) => void`          | `undefined`          | Search text change callback |
-| `emptyMessage`       | `string`                          | `'No results found'` | Message shown when no data  |
-| `className`          | `string`                          | `''`                 | Additional CSS class        |
-| `rowClassName`       | `string \| ((item: T) => string)` | `''`                 | Row CSS class               |
+| Prop                    | Type                              | Default              | Description                 |
+| ----------------------- | --------------------------------- | -------------------- | --------------------------- |
+| `data`                  | `T[]`                             | Required             | Array of data items         |
+| `columns`               | `Column<T>[]`                     | Required             | Array of column definitions |
+| `pageSize`              | `number`                          | `10`                 | Number of items per page    |
+| `selectable`            | `boolean`                         | `true`               | Enable row selection        |
+| `expandable`            | `boolean`                         | `false`              | Enable row expansion        |
+| `stickyHeader`          | `boolean`                         | `true`               | Make header stick to top    |
+| `loading`               | `boolean`                         | `false`              | Show loading state          |
+| `pagination`            | `boolean`                         | `true`               | Enable pagination           |
+| `searchable`            | `boolean`                         | `true`               | Show search box             |
+| `exportable`            | `boolean`                         | `true`               | Show export options         |
+| `disableInternalSearch` | `boolean`                         | `false`              | disable internal search     |
+| `theme`                 | `DataTableTheme`                  | `undefined`          | Custom theme object         |
+| `onSelectionChange`     | `(items: T[]) => void`            | `undefined`          | Selection callback          |
+| `onRowClick`            | `(item: T) => void`               | `undefined`          | Row click callback          |
+| `onPageChange`          | `(page: number) => void`          | `undefined`          | Page number change callback |
+| `onSearchTextChange`    | `(text: string) => void`          | `undefined`          | Search text change callback |
+| `emptyMessage`          | `string`                          | `'No results found'` | Message shown when no data  |
+| `className`             | `string`                          | `''`                 | Additional CSS class        |
+| `rowClassName`          | `string \| ((item: T) => string)` | `''`                 | Row CSS class               |
 
 ### Column Definition
 

@@ -162,6 +162,7 @@ function App() {
               exportable={true}
               exportFilename="users-data"
               loading={loading}
+              disableInternalSearch={false}
             />
           </div>
         ) : (
