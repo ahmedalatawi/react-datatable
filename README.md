@@ -2,7 +2,7 @@
 
 A powerful and flexible React DataTable component with built-in virtualization, sorting, filtering, and more. Built for performance and scalability, handling large datasets with ease.
 
-![DataTable Demo](https://github.com/ahmedalatawi/react-datatable/raw/main/demo.gif)
+[DataTable Demo](https://react-datatable-demo.netlify.app)
 
 ## Features
 
