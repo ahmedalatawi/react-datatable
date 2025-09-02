@@ -4,6 +4,8 @@ A powerful and flexible React DataTable component with built-in virtualization, 
 
 [DataTable Demo](https://react-datatable-demo.netlify.app)
 
+[DataTable Storybook](https://react-datatable-storybook.netlify.app)
+
 ## Features
 
 - 📦 **Virtual Scrolling**: Efficiently handle large datasets with virtualized rendering
@@ -87,6 +89,7 @@ The same import works for both scenarios - the library automatically detects and
 You can customize the appearance using either approach:
 
 **With Tailwind Classes:**
+
 ```tsx
 <DataTable
   data={data}
@@ -102,6 +105,7 @@ You can customize the appearance using either approach:
 ```
 
 **With Custom CSS:**
+
 ```css
 .my-custom-table {
   border: 2px solid #3b82f6;
@@ -121,11 +125,7 @@ You can customize the appearance using either approach:
 ```
 
 ```tsx
-<DataTable
-  data={data}
-  columns={columns}
-  className="my-custom-table"
-/>
+<DataTable data={data} columns={columns} className="my-custom-table" />
 ```
 
 ## Quick Start
@@ -254,6 +254,7 @@ interface DataTableTheme {
 The library supports multiple styling approaches to fit your project needs:
 
 #### 1. Tailwind CSS Classes
+
 ```tsx
 const customTheme = {
   container: "bg-white border-2 border-gray-300 rounded-xl shadow-lg",
@@ -264,10 +265,11 @@ const customTheme = {
   pagination: "bg-gray-50 border-t-2 border-gray-200",
 };
 
-<DataTable data={data} columns={columns} theme={customTheme} />
+<DataTable data={data} columns={columns} theme={customTheme} />;
 ```
 
 #### 2. CSS Classes
+
 ```css
 .dark-theme {
   background-color: #1f2937;
@@ -289,13 +291,14 @@ const customTheme = {
 ```
 
 #### 3. CSS-in-JS / Styled Components
+
 ```tsx
 const StyledDataTable = styled(DataTable)`
   .datatable-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
   }
-  
+
   .virtual-row:hover {
     background-color: rgba(102, 126, 234, 0.1);
     transform: translateY(-1px);
@@ -369,7 +372,7 @@ const largeData = Array.from({ length: 10000 }, (_, i) => ({
 The library exports individual components and hooks for advanced customization:
 
 ```tsx
-import { 
+import {
   DataTable,
   SearchBar,
   ExportMenu,
@@ -387,7 +390,7 @@ import {
   type Column,
   type DataTableProps,
   type DataTableTheme,
-  type Filter
+  type Filter,
 } from "@atawi/react-datatable";
 ```
 
@@ -396,17 +399,19 @@ import {
 Use the exported hooks to build completely custom table implementations:
 
 ```tsx
-import { useDataTableLogic, useSorting, useSelection } from "@atawi/react-datatable";
+import {
+  useDataTableLogic,
+  useSorting,
+  useSelection,
+} from "@atawi/react-datatable";
 
 function CustomTable({ data, columns }) {
-  const { filteredData } = useDataTableLogic(data, ['name', 'email']);
+  const { filteredData } = useDataTableLogic(data, ["name", "email"]);
   const { sortedData, handleSort } = useSorting(filteredData);
   const { selectedRows, handleSelectRow } = useSelection(sortedData);
 
   return (
-    <div className="my-custom-table">
-      {/* Your custom implementation */}
-    </div>
+    <div className="my-custom-table">{/* Your custom implementation */}</div>
   );
 }
 ```
