@@ -19,7 +19,7 @@ interface TestData {
 
 const meta = {
   title: "DataTable/Customization Guide",
-  component: DataTable,
+  component: DataTable<TestData>,
   parameters: {
     layout: "padded",
     docs: {
@@ -30,7 +30,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof DataTable>;
+} satisfies Meta<typeof DataTable<TestData>>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -81,6 +81,30 @@ const columns: Column<TestData>[] = [
 ];
 
 const data = generateMockData(30);
+
+const expandedContent = (item: TestData) => (
+  <div className="p-6 bg-slate-50 border-t border-slate-200">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="bg-white p-4 rounded-lg shadow-sm">
+        <h4 className="font-semibold text-slate-900 mb-2">Contact Info</h4>
+        <p className="text-sm text-slate-600">Email: {item.email}</p>
+        <p className="text-sm text-slate-600">
+          Location: {item.details.location}
+        </p>
+      </div>
+      <div className="bg-white p-4 rounded-lg shadow-sm">
+        <h4 className="font-semibold text-slate-900 mb-2">Department</h4>
+        <p className="text-sm text-slate-600">{item.details.department}</p>
+      </div>
+      <div className="bg-white p-4 rounded-lg shadow-sm">
+        <h4 className="font-semibold text-slate-900 mb-2">Activity</h4>
+        <p className="text-sm text-slate-600">
+          Last Login: {new Date(item.lastLogin).toLocaleDateString()}
+        </p>
+      </div>
+    </div>
+  </div>
+);
 
 // Example 1: Material Design inspired
 export const MaterialDesign: Story = {
@@ -178,25 +202,7 @@ export const EnterpriseDashboard: Story = {
     pageSize: 20,
     selectable: true,
     expandable: true,
-    expandedContent: (item: TestData) => (
-      <div className="p-6 bg-slate-50 border-t border-slate-200">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-semibold text-slate-900 mb-2">Contact Info</h4>
-            <p className="text-sm text-slate-600">Email: {item.email}</p>
-            <p className="text-sm text-slate-600">Location: {item.details.location}</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-semibold text-slate-900 mb-2">Department</h4>
-            <p className="text-sm text-slate-600">{item.details.department}</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-semibold text-slate-900 mb-2">Activity</h4>
-            <p className="text-sm text-slate-600">Last Login: {new Date(item.lastLogin).toLocaleDateString()}</p>
-          </div>
-        </div>
-      </div>
-    ),
+    expandedContent,
     searchable: true,
     exportable: true,
     theme: {
@@ -225,12 +231,16 @@ export const CreativeColorful: Story = {
     searchable: true,
     exportable: true,
     theme: {
-      container: "bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 rounded-3xl shadow-2xl border-2 border-pink-200",
-      toolbar: "bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white",
-      header: "bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 text-purple-900 font-bold",
+      container:
+        "bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 rounded-3xl shadow-2xl border-2 border-pink-200",
+      toolbar:
+        "bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white",
+      header:
+        "bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200 text-purple-900 font-bold",
       row: "hover:bg-white/70 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
       cell: "px-6 py-4",
-      selectedRow: "bg-gradient-to-r from-pink-100 to-purple-100 border-l-4 border-pink-500 shadow-lg",
+      selectedRow:
+        "bg-gradient-to-r from-pink-100 to-purple-100 border-l-4 border-pink-500 shadow-lg",
       pagination: "bg-gradient-to-r from-pink-50 to-indigo-50",
       searchBar: "bg-white/30 border-white/50 text-white placeholder-pink-200",
       exportMenu: "text-white hover:bg-white/20",
