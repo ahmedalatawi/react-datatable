@@ -1,0 +1,19 @@
+export { DataTable } from "./DataTable";
+export type { Column, DataTableProps, DataTableTheme, Filter } from "./types";
+
+// Export individual components for advanced customization
+export { SearchBar } from "./components/SearchBar";
+export { ExportMenu } from "./components/ExportMenu";
+export { Pagination } from "./components/Pagination";
+export { TableHeader } from "./components/TableHeader";
+export { TableRow } from "./components/TableRow";
+export { ColumnFilter } from "./components/ColumnFilter";
+export { LoadingSpinner } from "./components/LoadingSpinner";
+
+// Export hooks for custom implementations
+export { useDataTableLogic } from "./hooks/useDataTableLogic";
+export { useSorting } from "./hooks/useSorting";
+export { useSelection } from "./hooks/useSelection";
+export { usePagination } from "./hooks/usePagination";
+export { useVirtualization } from "./hooks/useVirtualization";
+export { useRowInteraction } from "./hooks/useRowInteraction";

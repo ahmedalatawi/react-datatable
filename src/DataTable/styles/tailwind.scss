@@ -1,0 +1,109 @@
+/* Tailwind-specific overrides and utilities */
+.datatable-container {
+  @apply w-full bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col relative;
+  height: calc(100vh - 2rem);
+
+  .datatable-toolbar {
+    @apply p-4 border-b border-gray-200 bg-white flex items-center justify-between top-0 z-40;
+    position: sticky;
+  }
+
+  .datatable-header-wrapper {
+    @apply bg-white z-30;
+
+    &.sticky {
+      @apply top-0;
+      position: sticky;
+
+      &.with-toolbar {
+        top: 64px;
+      }
+    }
+  }
+
+  .datatable-body {
+    @apply flex-1 relative overflow-hidden;
+    min-height: 200px;
+
+    .virtual-row {
+      @apply transition-colors duration-150 border-b border-gray-200;
+
+      &.selected {
+        @apply bg-blue-50;
+      }
+
+      &:hover {
+        @apply bg-gray-50;
+
+        &.selected {
+          @apply bg-blue-100;
+        }
+      }
+
+      .row-main {
+        @apply flex items-center w-full h-12;
+      }
+
+      .virtual-cell {
+        @apply text-sm text-gray-700 px-6 py-3 flex items-center h-12 border-r border-gray-200/50 last:border-r-0;
+
+        .cell-content {
+          @apply truncate w-full;
+        }
+      }
+
+      .checkbox-cell {
+        @apply w-16 px-4 flex items-center justify-center flex-shrink-0 h-12 border-r border-gray-200/50;
+
+        input[type="checkbox"] {
+          @apply rounded border-gray-300 text-blue-600 shadow-sm 
+                 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50
+                 cursor-pointer;
+        }
+      }
+
+      .expand-cell {
+        @apply w-10 flex items-center justify-center cursor-pointer flex-shrink-0 h-12 border-r border-gray-200/50;
+
+        .expand-icon {
+          @apply transition-transform duration-300 w-4 h-4 flex items-center justify-center text-gray-500;
+
+          &.expanded {
+            @apply transform rotate-90;
+          }
+        }
+      }
+
+      .expanded-content {
+        @apply border-t border-gray-200 bg-gray-50;
+      }
+    }
+  }
+
+  .loading-overlay {
+    @apply absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50;
+  }
+
+  .empty-message {
+    @apply flex items-center justify-center h-full text-gray-500 text-sm;
+  }
+
+  .datatable-footer {
+    @apply bottom-0 z-30 bg-white border-t border-gray-200;
+    position: sticky;
+  }
+}
+
+@screen sm {
+  .datatable-container {
+    .virtual-cell {
+      @apply px-6 py-3;
+    }
+
+    .datatable-header-wrapper {
+      &.sticky.with-toolbar {
+        top: 64px;
+      }
+    }
+  }
+}
