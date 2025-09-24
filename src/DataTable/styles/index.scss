@@ -1,11 +1,11 @@
 /* Main stylesheet that imports all component styles */
-@import "./base.scss";
-@import "./SearchBar.scss";
-@import "./ExportMenu.scss";
-@import "./Pagination.scss";
-@import "./TableHeader.scss";
-@import "./ColumnFilter.scss";
-@import "./LoadingSpinner.scss";
+@use "base.scss";
+@use "SearchBar.scss";
+@use "ExportMenu.scss";
+@use "Pagination.scss";
+@use "TableHeader.scss";
+@use "ColumnFilter.scss";
+@use "LoadingSpinner.scss";
 
 /* Import Tailwind styles if available */
-@import "./tailwind.scss";
+@use "tailwind.scss";
