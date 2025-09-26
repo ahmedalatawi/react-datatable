@@ -9,6 +9,7 @@ describe("SearchBar", () => {
     value: "",
     onChange: vi.fn(),
     placeholder: "Search...",
+    useTailwind: false,
   };
 
   it("renders search input", () => {
@@ -36,5 +37,17 @@ describe("SearchBar", () => {
   it("reflects controlled value", () => {
     render(<SearchBar {...defaultProps} value="test value" />);
     expect(screen.getByPlaceholderText("Search...")).toHaveValue("test value");
+  });
+
+  it("applies CSS classes by default", () => {
+    const { container } = render(<SearchBar {...defaultProps} />);
+    const searchContainer = container.querySelector('.datatable-search');
+    expect(searchContainer).toHaveClass('use-css');
+  });
+
+  it("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(<SearchBar {...defaultProps} useTailwind={true} />);
+    const searchContainer = container.querySelector('.datatable-search');
+    expect(searchContainer).toHaveClass('use-tailwind');
   });
 });

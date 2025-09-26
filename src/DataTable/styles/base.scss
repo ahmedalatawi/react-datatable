@@ -1,5 +1,6 @@
 /* Base styles that work without Tailwind */
-.datatable-container {
+.datatable-container.use-css,
+.datatable-container:not(.use-tailwind) {
   width: 100%;
   background-color: white;
   border-radius: 0.5rem;

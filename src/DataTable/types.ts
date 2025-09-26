@@ -46,6 +46,7 @@ export interface DataTableProps<T> {
   exportable?: boolean;
   exportFilename?: string;
   disableInternalSearch?: boolean;
+  useTailwind?: boolean;
 }
 
 export interface DataTableTheme {

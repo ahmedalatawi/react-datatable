@@ -7,6 +7,7 @@ interface ExportMenuProps<T> {
   columns: Column<T>[];
   filename?: string;
   theme?: string;
+  useTailwind?: boolean;
 }
 
 export function ExportMenu<T>({
@@ -14,6 +15,7 @@ export function ExportMenu<T>({
   columns,
   theme = "",
   filename = "data",
+  useTailwind = false,
 }: ExportMenuProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -90,7 +92,7 @@ export function ExportMenu<T>({
   };
 
   return (
-    <div className={`export-menu-container ${theme}`}>
+    <div className={`export-menu-container ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="export-button"

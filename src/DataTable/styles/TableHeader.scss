@@ -1,5 +1,6 @@
 /* Base TableHeader styles */
-.datatable-header {
+.datatable-header.use-css,
+.datatable-header:not(.use-tailwind) {
   background-color: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -102,21 +103,17 @@
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
   .datatable-header {
-    @apply bg-gray-50 border-b border-gray-200;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    @apply bg-gray-50 border-b border-gray-200 shadow-[0_1px_2px_rgba(0,0,0,0.05)];
 
     .header-row {
       @apply flex items-stretch min-w-full;
     }
 
     .header-cell {
-      @apply px-6 py-3 text-xs text-gray-500 uppercase tracking-wider select-none flex items-center;
-      height: 48px;
-      font-weight: 500;
-      border-right: 1px solid rgba(229, 231, 235, 0.5);
+      @apply px-6 py-3 text-xs text-gray-500 uppercase tracking-wider select-none flex items-center h-12 font-medium border-r-[rgba(229,231,235,0.5)] border-r border-solid;
 
       &:last-child {
-        border-right: none;
+        @apply border-r-[none];
       }
 
       &.sortable {
@@ -126,8 +123,7 @@
       }
 
       &.checkbox-cell {
-        @apply w-16 px-4 justify-center flex-shrink-0;
-        border-right: 1px solid rgba(229, 231, 235, 0.5);
+        @apply w-16 px-4 justify-center flex-shrink-0 border-r-[rgba(229,231,235,0.5)] border-r border-solid;
 
         .checkbox {
           @apply rounded border-gray-300 text-blue-600 shadow-sm 

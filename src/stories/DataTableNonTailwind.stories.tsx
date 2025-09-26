@@ -213,10 +213,18 @@ const data = generateMockData(50);
 
 const expandedContent = (item: TestData) => (
   <div style={{ padding: "1rem", backgroundColor: "#f9fafb" }}>
-    <h3 style={{ fontSize: "1.125rem", fontWeight: "600", marginBottom: "0.5rem" }}>
+    <h3
+      style={{
+        fontSize: "1.125rem",
+        fontWeight: "600",
+        marginBottom: "0.5rem",
+      }}
+    >
       Additional Details
     </h3>
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+    <div
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}
+    >
       <div>
         <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>Location</p>
         <p style={{ fontWeight: "500" }}>{item.details.location}</p>

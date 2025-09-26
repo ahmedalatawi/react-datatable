@@ -136,6 +136,7 @@ export const Bordered: Story = {
     // expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };
 
@@ -150,6 +151,7 @@ export const Borderless: Story = {
     searchable: true,
     exportable: true,
     className: "borderless",
+    useTailwind: true,
   },
 };
 
@@ -163,6 +165,7 @@ export const StripedBordered: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };
 
@@ -176,5 +179,6 @@ export const ModernBordered: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };

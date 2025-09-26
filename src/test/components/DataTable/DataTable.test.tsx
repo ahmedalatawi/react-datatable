@@ -10,6 +10,7 @@ describe("DataTable", () => {
     data: mockData,
     columns,
     pageSize: 10,
+    useTailwind: false,
   };
 
   it("renders table with data", () => {
@@ -83,5 +84,17 @@ describe("DataTable", () => {
   it("hides export when disabled", () => {
     render(<DataTable {...defaultProps} exportable={false} />);
     expect(screen.queryByText("Export")).not.toBeInTheDocument();
+  });
+
+  it("uses CSS by default", () => {
+    const { container } = render(<DataTable {...defaultProps} />);
+    const tableContainer = container.querySelector('.datatable-container');
+    expect(tableContainer).toHaveClass('use-css');
+  });
+
+  it("uses Tailwind when useTailwind prop is true", () => {
+    const { container } = render(<DataTable {...defaultProps} useTailwind={true} />);
+    const tableContainer = container.querySelector('.datatable-container');
+    expect(tableContainer).toHaveClass('use-tailwind');
   });
 });

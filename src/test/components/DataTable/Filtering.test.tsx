@@ -10,6 +10,7 @@ describe("DataTable Filtering", () => {
     data: mockData,
     columns,
     pageSize: 10,
+    useTailwind: false,
   };
 
   it("filters data by text search", async () => {

@@ -5,6 +5,7 @@ interface SearchBarProps {
   onChange: (value: string) => void;
   placeholder?: string;
   theme?: string;
+  useTailwind?: boolean;
 }
 
 export function SearchBar({
@@ -12,9 +13,10 @@ export function SearchBar({
   onChange,
   placeholder = "Search...",
   theme,
+  useTailwind = false,
 }: SearchBarProps) {
   return (
-    <div className={`datatable-search ${theme || ""}`}>
+    <div className={`datatable-search ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme || ""}`}>
       <div className="search-wrapper">
         <span className="search-icon" aria-hidden="true">
           <SearchIcon />

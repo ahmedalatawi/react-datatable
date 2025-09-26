@@ -15,6 +15,7 @@ interface TableRowProps<T> {
   onKeyPress?: (event: React.KeyboardEvent) => void;
   expandedContent?: React.ReactNode;
   theme?: string;
+  useTailwind?: boolean;
 }
 
 export function TableRow<T>({
@@ -30,11 +31,12 @@ export function TableRow<T>({
   onKeyPress,
   expandedContent,
   theme,
+  useTailwind = false,
 }: TableRowProps<T>) {
   return (
     <>
       <div
-        className={`virtual-row ${selected ? 'selected' : ''} ${theme || ''}`}
+        className={`virtual-row ${useTailwind ? 'use-tailwind' : 'use-css'} ${selected ? 'selected' : ''} ${theme || ''}`}
         onClick={onClick}
         onKeyPress={onKeyPress}
         role="row"

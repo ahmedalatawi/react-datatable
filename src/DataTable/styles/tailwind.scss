@@ -1,5 +1,5 @@
 /* Tailwind-specific overrides and utilities */
-.datatable-container {
+.datatable-container.use-tailwind {
   @apply w-full bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col relative;
   height: calc(100vh - 2rem);
 
@@ -95,7 +95,7 @@
 }
 
 @screen sm {
-  .datatable-container {
+  .datatable-container.use-tailwind {
     .datatable-toolbar {
       @apply p-4 min-h-16;
     }

@@ -10,6 +10,7 @@ interface PaginationProps {
   totalPages: number;
   onPageChange: (page: number) => void;
   theme?: string;
+  useTailwind?: boolean;
 }
 
 export function Pagination({
@@ -17,6 +18,7 @@ export function Pagination({
   totalPages,
   onPageChange,
   theme,
+  useTailwind = false,
 }: PaginationProps) {
   const startItem = (currentPage - 1) * 10 + 1;
   const endItem = Math.min(currentPage * 10, totalPages * 10);
@@ -24,7 +26,7 @@ export function Pagination({
 
   return (
     <div
-      className={`datatable-pagination ${theme}`}
+      className={`datatable-pagination ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme}`}
       role="navigation"
       aria-label="Pagination"
     >

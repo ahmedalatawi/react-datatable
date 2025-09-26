@@ -14,6 +14,7 @@ interface TableHeaderProps<T> {
   filters: Map<keyof T, Filter<T>>;
   onFilterChange: (columnKey: keyof T, filter: Filter<T> | null) => void;
   uniqueColumnValues: Map<keyof T, Set<string | number>>;
+  useTailwind?: boolean;
 }
 
 export function TableHeader<T>({
@@ -28,9 +29,10 @@ export function TableHeader<T>({
   filters,
   onFilterChange,
   uniqueColumnValues,
+  useTailwind = false,
 }: TableHeaderProps<T>) {
   return (
-    <div className={`datatable-header ${theme} ${sticky ? "sticky" : ""}`}>
+    <div className={`datatable-header ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme} ${sticky ? "sticky" : ""}`}>
       <div className="header-row">
         {selectable && (
           <div className="header-cell checkbox-cell">
@@ -92,6 +94,7 @@ export function TableHeader<T>({
                   }
                   currentFilter={filters.get(column.key) || null}
                   uniqueValues={uniqueColumnValues.get(column.key)}
+                  useTailwind={useTailwind}
                 />
               )}
             </div>

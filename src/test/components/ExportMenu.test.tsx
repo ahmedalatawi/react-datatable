@@ -23,12 +23,12 @@ describe("ExportMenu", () => {
   });
 
   it("renders export button", () => {
-    render(<ExportMenu data={mockData} columns={columns} />);
+    render(<ExportMenu data={mockData} columns={columns} useTailwind={false} />);
     expect(screen.getByText("Export")).toBeInTheDocument();
   });
 
   it("shows export options when clicked", async () => {
-    render(<ExportMenu data={mockData} columns={columns} />);
+    render(<ExportMenu data={mockData} columns={columns} useTailwind={false} />);
     await userEvent.click(screen.getByText("Export"));
     expect(screen.getByText("Export as CSV")).toBeInTheDocument();
     expect(screen.getByText("Export as JSON")).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe("ExportMenu", () => {
 
   it("handles CSV export", async () => {
     const { container } = render(
-      <ExportMenu data={mockData} columns={columns} />
+      <ExportMenu data={mockData} columns={columns} useTailwind={false} />
     );
     await userEvent.click(screen.getByText("Export"));
     await userEvent.click(screen.getByText("Export as CSV"));
@@ -51,7 +51,7 @@ describe("ExportMenu", () => {
 
   it("handles JSON export", async () => {
     const { container } = render(
-      <ExportMenu data={mockData} columns={columns} />
+      <ExportMenu data={mockData} columns={columns} useTailwind={false} />
     );
     await userEvent.click(screen.getByText("Export"));
     await userEvent.click(screen.getByText("Export as JSON"));
@@ -63,9 +63,21 @@ describe("ExportMenu", () => {
   });
 
   it("closes menu when clicking outside", async () => {
-    render(<ExportMenu data={mockData} columns={columns} />);
+    render(<ExportMenu data={mockData} columns={columns} useTailwind={false} />);
     await userEvent.click(screen.getByText("Export"));
     await userEvent.click(document.body);
     expect(screen.queryByText("Export as CSV")).not.toBeInTheDocument();
+  });
+
+  it("applies CSS classes by default", () => {
+    const { container } = render(<ExportMenu data={mockData} columns={columns} useTailwind={false} />);
+    const exportContainer = container.querySelector('.export-menu-container');
+    expect(exportContainer).toHaveClass('use-css');
+  });
+
+  it("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(<ExportMenu data={mockData} columns={columns} useTailwind={true} />);
+    const exportContainer = container.querySelector('.export-menu-container');
+    expect(exportContainer).toHaveClass('use-tailwind');
   });
 });

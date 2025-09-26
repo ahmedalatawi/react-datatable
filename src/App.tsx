@@ -163,6 +163,7 @@ function App() {
               exportFilename="users-data"
               loading={loading}
               disableInternalSearch={false}
+              useTailwind={true}
             />
           </div>
         ) : (
@@ -189,6 +190,7 @@ function App() {
               searchable={false}
               exportable={false}
               loading={loading}
+              useTailwind={true}
             />
           </div>
         )}

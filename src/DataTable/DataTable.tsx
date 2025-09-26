@@ -51,6 +51,7 @@ export function DataTable<T extends { id: string | number }>({
   exportable = true,
   exportFilename = "table-data",
   disableInternalSearch = false,
+  useTailwind = false,
 }: DataTableProps<T>) {
   const { sortConfig, handleSort, sortedData } = useSorting(
     data,
@@ -144,6 +145,7 @@ export function DataTable<T extends { id: string | number }>({
                 ? rowClassName(item)
                 : `${rowClassName} ${theme?.row || ""}`
             }
+            useTailwind={useTailwind}
           />
         </div>
       );
@@ -161,6 +163,7 @@ export function DataTable<T extends { id: string | number }>({
       onRowClick,
       expandedContent,
       rowClassName,
+      useTailwind,
       handleSelectRow,
       toggleExpandRow,
       handleRowClick,
@@ -172,19 +175,22 @@ export function DataTable<T extends { id: string | number }>({
 
   return (
     <div
-      className={`datatable-container ${className} ${theme?.container || ""}`}
+      className={`datatable-container ${
+        useTailwind ? "use-tailwind" : "use-css"
+      } ${className} ${theme?.container || ""}`}
       role="grid"
       aria-label={ariaLabel}
       aria-describedby={ariaDescribedby}
     >
       {showToolbar && (
-        <div className="datatable-toolbar">
+        <div className={`datatable-toolbar ${theme?.toolbar || ""}`}>
           {searchable && (
             <SearchBar
               value={searchTerm}
               onChange={handleSearchChange}
               placeholder={searchPlaceholder}
               theme={theme?.searchBar}
+              useTailwind={useTailwind}
             />
           )}
           {exportable && (
@@ -193,6 +199,7 @@ export function DataTable<T extends { id: string | number }>({
               columns={columns}
               filename={exportFilename}
               theme={theme?.exportMenu}
+              useTailwind={useTailwind}
             />
           )}
         </div>
@@ -217,13 +224,14 @@ export function DataTable<T extends { id: string | number }>({
           filters={filters}
           onFilterChange={handleFilterChange}
           uniqueColumnValues={uniqueColumnValues}
+          useTailwind={useTailwind}
         />
       </div>
 
       <div className={`datatable-body ${theme?.body || ""}`}>
         {loading ? (
           <div className={`loading-overlay ${theme?.loadingOverlay || ""}`}>
-            <LoadingSpinner />
+            <LoadingSpinner useTailwind={useTailwind} />
           </div>
         ) : displayData.length === 0 ? (
           <div
@@ -257,6 +265,7 @@ export function DataTable<T extends { id: string | number }>({
             totalPages={totalPages}
             onPageChange={handlePageChange}
             theme={theme?.pagination}
+            useTailwind={useTailwind}
           />
         </div>
       )}

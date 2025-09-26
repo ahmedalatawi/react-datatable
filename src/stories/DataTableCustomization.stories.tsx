@@ -183,6 +183,7 @@ export const CompactMobile: Story = {
     selectable: true,
     searchable: true,
     exportable: false,
+    useTailwind: false,
     theme: {
       container: "bg-white rounded-lg shadow-sm border border-gray-200",
       header: "bg-gray-50 text-gray-600 text-xs",
@@ -205,6 +206,7 @@ export const EnterpriseDashboard: Story = {
     expandedContent,
     searchable: true,
     exportable: true,
+    useTailwind: false,
     theme: {
       container: "bg-white rounded-lg shadow-lg border border-slate-200",
       toolbar: "bg-slate-800 text-white px-6 py-4",
@@ -230,6 +232,7 @@ export const CreativeColorful: Story = {
     expandedContent,
     searchable: true,
     exportable: true,
+    useTailwind: false,
     theme: {
       container:
         "bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 rounded-3xl shadow-2xl border-2 border-pink-200",

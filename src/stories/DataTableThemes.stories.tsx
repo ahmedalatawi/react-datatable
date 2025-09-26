@@ -109,6 +109,7 @@ export const Modern: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };
 
@@ -122,6 +123,7 @@ export const Dark: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };
 
@@ -135,6 +137,7 @@ export const Minimal: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };
 
@@ -148,5 +151,6 @@ export const Colorful: Story = {
     expandable: true,
     searchable: true,
     exportable: true,
+    useTailwind: true,
   },
 };

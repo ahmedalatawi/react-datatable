@@ -1,5 +1,6 @@
 /* Base LoadingSpinner styles */
-.loading-spinner {
+.loading-spinner.use-css,
+.loading-spinner:not(.use-tailwind) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,32 +70,24 @@
     @apply flex flex-col items-center justify-center gap-4;
 
     .spinner {
-      @apply relative w-12 h-12;
+      @apply relative w-12 h-12 animate-spin before:border-t-blue-500 before:border-r-blue-500 after:border-b-blue-300 after:border-l-blue-300;
 
       &::before {
-        @apply border-t-blue-500 border-r-blue-500;
+        @apply absolute content-[""] rounded-[50%] border-4 border-solid border-transparent inset-0 border-t-blue-500 border-r-blue-500;
       }
 
       &::after {
-        @apply border-b-blue-300 border-l-blue-300;
+        @apply absolute content-[""] rounded-[50%] border-4 border-solid border-transparent inset-0 border-b-blue-300 border-l-blue-300;
       }
     }
 
     .loading-text {
-      @apply text-gray-600 text-sm;
-      font-weight: 500;
+      @apply text-gray-600 text-sm font-medium;
     }
 
     .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
+      @apply absolute w-px h-px overflow-hidden whitespace-nowrap -m-px p-0 border-0;
       clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
     }
   }
 }

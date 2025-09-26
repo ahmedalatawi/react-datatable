@@ -87,6 +87,7 @@ export const AntDesignStyle: Story = {
     selectable: true,
     searchable: true,
     exportable: true,
+    useTailwind: false,
     theme: {
       container: "bg-white rounded-lg border border-gray-300",
       header: "bg-gray-50 text-gray-700 border-b border-gray-300",
@@ -107,6 +108,7 @@ export const MaterialUIStyle: Story = {
     selectable: true,
     searchable: true,
     exportable: true,
+    useTailwind: false,
     theme: {
       container: "bg-white rounded-lg shadow-md border-0",
       header: "bg-gray-100 text-gray-700 font-medium",
@@ -128,6 +130,7 @@ export const BootstrapStyle: Story = {
     searchable: true,
     exportable: true,
     className: "table-responsive",
+    useTailwind: false,
     theme: {
       container: "bg-white border border-gray-300 rounded",
       header: "bg-gray-100 text-gray-700 border-b border-gray-300",
@@ -148,6 +151,7 @@ export const ChakraUIStyle: Story = {
     selectable: true,
     searchable: true,
     exportable: true,
+    useTailwind: false,
     theme: {
       container: "bg-white rounded-md shadow-sm border border-gray-200",
       header: "bg-gray-50 text-gray-600 font-semibold",
@@ -169,6 +173,7 @@ export const CSSVariables: Story = {
     searchable: true,
     exportable: true,
     className: "css-variables-theme",
+    useTailwind: false,
   },
   decorators: [
     (Story) => (

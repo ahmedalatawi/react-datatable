@@ -17,6 +17,7 @@ describe("ColumnFilter", () => {
     onFilterChange: vi.fn(),
     currentFilter: null as Filter<any> | null,
     uniqueValues: new Set(["value1", "value2"]),
+    useTailwind: false,
   };
 
   it("renders filter button", () => {
@@ -77,5 +78,17 @@ describe("ColumnFilter", () => {
       />
     );
     expect(screen.getByLabelText(/Filter/)).toHaveClass("active");
+  });
+
+  it("applies CSS classes by default", () => {
+    const { container } = render(<ColumnFilter {...defaultProps} />);
+    const filterContainer = container.querySelector('.column-filter');
+    expect(filterContainer).toHaveClass('use-css');
+  });
+
+  it("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(<ColumnFilter {...defaultProps} useTailwind={true} />);
+    const filterContainer = container.querySelector('.column-filter');
+    expect(filterContainer).toHaveClass('use-tailwind');
   });
 });

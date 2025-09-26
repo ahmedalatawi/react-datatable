@@ -1,5 +1,6 @@
 /* Base ExportMenu styles */
-.export-menu-container {
+.export-menu-container.use-css,
+.export-menu-container:not(.use-tailwind) {
   position: relative;
   display: inline-block;
 
@@ -102,9 +103,7 @@
       @apply inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm
              rounded-md text-gray-700 bg-white hover:bg-gray-50
              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-             transition-colors duration-150;
-
-      font-weight: 500;
+             transition-colors duration-150 font-medium;
 
       .arrow-icon {
         @apply ml-2 transition-transform duration-150;
@@ -126,9 +125,8 @@
       backdrop-filter: blur(8px);
 
       .export-option {
-        @apply block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
+        @apply block relative w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100
                focus:outline-none focus:bg-gray-100 transition-colors duration-150;
-        position: relative;
 
         &:first-child {
           @apply rounded-t-md;

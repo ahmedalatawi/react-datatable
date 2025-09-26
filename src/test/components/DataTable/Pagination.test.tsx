@@ -16,6 +16,7 @@ describe("DataTable Pagination", () => {
       { key: "status", header: "Status", sortable: true },
     ],
     pageSize: 10,
+    useTailwind: false,
   };
 
   it("shows correct number of items per page", () => {

@@ -10,6 +10,7 @@ describe("DataTable Sorting", () => {
     data: mockData,
     columns,
     pageSize: 10,
+    useTailwind: false,
   };
 
   it("sorts by default column and direction", () => {

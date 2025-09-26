@@ -28,6 +28,7 @@ describe("TableHeader", () => {
     filters: new Map(),
     onFilterChange: vi.fn(),
     uniqueColumnValues: new Map(),
+    useTailwind: false,
   };
 
   it("renders all columns", () => {
@@ -71,5 +72,17 @@ describe("TableHeader", () => {
     render(<TableHeader {...defaultProps} theme="custom-theme" />);
     const header = screen.getByRole("row");
     expect(header.parentElement).toHaveClass("custom-theme");
+  });
+
+  it("applies CSS classes by default", () => {
+    const { container } = render(<TableHeader {...defaultProps} />);
+    const headerContainer = container.querySelector('.datatable-header');
+    expect(headerContainer).toHaveClass('use-css');
+  });
+
+  it("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(<TableHeader {...defaultProps} useTailwind={true} />);
+    const headerContainer = container.querySelector('.datatable-header');
+    expect(headerContainer).toHaveClass('use-tailwind');
   });
 });

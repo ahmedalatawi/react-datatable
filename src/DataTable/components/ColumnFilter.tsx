@@ -6,6 +6,7 @@ interface ColumnFilterProps<T> {
   onFilterChange: (filter: Filter<T> | null) => void;
   currentFilter: Filter<T> | null;
   uniqueValues?: Set<string | number>;
+  useTailwind?: boolean;
 }
 
 export function ColumnFilter<T>({
@@ -13,13 +14,14 @@ export function ColumnFilter<T>({
   onFilterChange,
   currentFilter,
   uniqueValues,
+  useTailwind = false,
 }: ColumnFilterProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [filterValue, setFilterValue] = useState(
     currentFilter?.value?.toString() || ""
   );
   const [operator, setOperator] = useState<string>(
-    currentFilter?.operator || "contains"
+    currentFilter?.operator || "equals" //"contains"
   );
 
   const operators = useMemo(() => {
@@ -64,7 +66,9 @@ export function ColumnFilter<T>({
   }, [onFilterChange]);
 
   return (
-    <div className="column-filter">
+    <div
+      className={`column-filter ${useTailwind ? "use-tailwind" : "use-css"}`}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`filter-button ${currentFilter ? "active" : ""}`}

@@ -38,7 +38,7 @@ const columns: Column<TestData>[] = [
 
 describe("DataTable", () => {
   test("renders table with correct data", async () => {
-    render(<DataTable data={mockData} columns={columns} loading={false} />);
+    render(<DataTable data={mockData} columns={columns} loading={false} useTailwind={false} />);
 
     await waitFor(() => {
       expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -47,7 +47,7 @@ describe("DataTable", () => {
   });
 
   it("handles sorting", async () => {
-    render(<DataTable data={mockData} columns={columns} />);
+    render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const nameHeader = screen.getByText("Name");
     await userEvent.click(nameHeader);
@@ -57,7 +57,7 @@ describe("DataTable", () => {
   });
 
   it("handles searching", async () => {
-    render(<DataTable data={mockData} columns={columns} />);
+    render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const searchInput = screen.getByPlaceholderText("Search...");
     await userEvent.type(searchInput, "John");
@@ -74,6 +74,7 @@ describe("DataTable", () => {
         columns={columns}
         selectable={true}
         onSelectionChange={onSelectionChange}
+        useTailwind={false}
       />
     );
 
@@ -84,7 +85,7 @@ describe("DataTable", () => {
   });
 
   it("handles filtering", async () => {
-    render(<DataTable data={mockData} columns={columns} />);
+    render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const filterButton = screen.getAllByLabelText(/Filter/)[0];
     await userEvent.click(filterButton);
@@ -107,7 +108,7 @@ describe("DataTable", () => {
       status: i % 2 === 0 ? "active" : "inactive",
     }));
 
-    render(<DataTable data={largeData} columns={columns} pageSize={10} />);
+    render(<DataTable data={largeData} columns={columns} pageSize={10} useTailwind={false} />);
 
     const nextButton = screen.getByLabelText("Next page");
     await userEvent.click(nextButton);
@@ -118,13 +119,27 @@ describe("DataTable", () => {
 
   it("handles empty data state", () => {
     render(
-      <DataTable data={[]} columns={columns} emptyMessage="No data available" />
+      <DataTable data={[]} columns={columns} emptyMessage="No data available" useTailwind={false} />
     );
     expect(screen.getByText("No data available")).toBeInTheDocument();
   });
 
   it("handles loading state", () => {
-    render(<DataTable data={mockData} columns={columns} loading={true} />);
+    render(<DataTable data={mockData} columns={columns} loading={true} useTailwind={false} />);
     expect(screen.getByText("Loading...")).toBeInTheDocument();
+  });
+
+  it("uses CSS by default", () => {
+    const { container } = render(<DataTable data={mockData} columns={columns} />);
+    const tableContainer = container.querySelector('.datatable-container');
+    expect(tableContainer).toHaveClass('use-css');
+    expect(tableContainer).not.toHaveClass('use-tailwind');
+  });
+
+  it("uses Tailwind when useTailwind prop is true", () => {
+    const { container } = render(<DataTable data={mockData} columns={columns} useTailwind={true} />);
+    const tableContainer = container.querySelector('.datatable-container');
+    expect(tableContainer).toHaveClass('use-tailwind');
+    expect(tableContainer).not.toHaveClass('use-css');
   });
 });

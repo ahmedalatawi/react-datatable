@@ -9,6 +9,7 @@ describe("Pagination", () => {
     currentPage: 1,
     totalPages: 5,
     onPageChange: vi.fn(),
+    useTailwind: false,
   };
 
   it("renders pagination controls", () => {
@@ -50,5 +51,17 @@ describe("Pagination", () => {
   it("shows correct range information", () => {
     render(<Pagination {...defaultProps} />);
     expect(screen.getByText(/Showing 1 to 10/)).toBeInTheDocument();
+  });
+
+  it("applies CSS classes by default", () => {
+    const { container } = render(<Pagination {...defaultProps} />);
+    const paginationContainer = container.querySelector('.datatable-pagination');
+    expect(paginationContainer).toHaveClass('use-css');
+  });
+
+  it("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(<Pagination {...defaultProps} useTailwind={true} />);
+    const paginationContainer = container.querySelector('.datatable-pagination');
+    expect(paginationContainer).toHaveClass('use-tailwind');
   });
 });

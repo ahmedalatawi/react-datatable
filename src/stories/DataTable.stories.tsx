@@ -108,6 +108,7 @@ export const Basic: Story = {
     selectable: true,
     expandable: false,
     stickyHeader: true,
+    useTailwind: false,
   },
 };
 
@@ -115,6 +116,7 @@ export const Loading: Story = {
   args: {
     ...Basic.args,
     loading: true,
+    useTailwind: false,
   },
 };
 
@@ -123,6 +125,7 @@ export const Empty: Story = {
     ...Basic.args,
     data: [],
     emptyMessage: "No data available",
+    useTailwind: false,
   },
 };
 
@@ -130,6 +133,7 @@ export const WithExpandableRows: Story = {
   args: {
     ...Basic.args,
     expandable: true,
+    useTailwind: false,
     expandedContent: (item: TestData) => (
       <div className="p-4 bg-gray-50">
         <h3 className="text-lg font-semibold mb-2">Additional Details</h3>
@@ -153,5 +157,6 @@ export const LargeDataset: Story = {
     ...Basic.args,
     data: generateMockData(10000),
     pageSize: 50,
+    useTailwind: false,
   },
 };

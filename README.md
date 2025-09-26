@@ -60,40 +60,61 @@ yarn add @atawi/react-datatable
 
 ## CSS Setup
 
-The library works with both Tailwind CSS and regular CSS projects.
+The library uses CSS by default and optionally supports Tailwind CSS.
+
+### Default CSS (Recommended)
+
+By default, the library uses its own CSS styles that work in any project:
+
+```tsx
+import { DataTable } from "@atawi/react-datatable";
+import "@atawi/react-datatable/dist/style.css";
+```
 
 ### With Tailwind CSS
 
-If you're using Tailwind CSS, simply import the component and styles:
+If you prefer to use Tailwind CSS utilities, set the `useTailwind` prop to `true`:
 
 ```tsx
 import { DataTable } from "@atawi/react-datatable";
 import "@atawi/react-datatable/dist/style.css";
+
+<DataTable
+  data={data}
+  columns={columns}
+  useTailwind={true}
+/>
 ```
 
-The library will automatically use Tailwind utilities when available and fall back to custom CSS when not.
-
-### Without Tailwind CSS
-
-For projects not using Tailwind, the library includes complete standalone styles:
-
-```tsx
-import { DataTable } from "@atawi/react-datatable";
-import "@atawi/react-datatable/dist/style.css";
-```
-
-The same import works for both scenarios - the library automatically detects and adapts to your setup.
+**Note:** When using `useTailwind={true}`, make sure your project has Tailwind CSS installed and configured.
 
 ### Custom Styling
 
-You can customize the appearance using either approach:
+You can customize the appearance regardless of which styling approach you use:
 
-**With Tailwind Classes:**
+**With CSS Classes:**
 
 ```tsx
 <DataTable
   data={data}
   columns={columns}
+  className="my-custom-table"
+  theme={{
+    container: "custom-container",
+    header: "custom-header",
+    row: "custom-row",
+    selectedRow: "custom-selected-row",
+  }}
+/>
+```
+
+**With Tailwind Classes (when useTailwind={true}):**
+
+```tsx
+<DataTable
+  data={data}
+  columns={columns}
+  useTailwind={true}
   className="border-2 border-blue-500 rounded-xl"
   theme={{
     container: "bg-gradient-to-r from-blue-50 to-indigo-50",
@@ -102,30 +123,6 @@ You can customize the appearance using either approach:
     selectedRow: "bg-blue-100 border-l-4 border-blue-500",
   }}
 />
-```
-
-**With Custom CSS:**
-
-```css
-.my-custom-table {
-  border: 2px solid #3b82f6;
-  border-radius: 12px;
-}
-
-.my-custom-table .datatable-header {
-  background: linear-gradient(to right, #3b82f6, #6366f1);
-  color: white;
-}
-
-.my-custom-table .virtual-row:hover {
-  background-color: #eff6ff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-```
-
-```tsx
-<DataTable data={data} columns={columns} className="my-custom-table" />
 ```
 
 ## Quick Start
@@ -178,6 +175,7 @@ function App() {
       stickyHeader={true}
       searchable={true}
       exportable={true}
+      useTailwind={false} // Use CSS by default
       onSelectionChange={handleSelectionChange}
     />
   );

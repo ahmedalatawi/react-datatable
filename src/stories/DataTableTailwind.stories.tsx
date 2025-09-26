@@ -174,6 +174,7 @@ export const ModernTailwind: Story = {
     searchable: true,
     exportable: true,
     theme: modernTailwindTheme,
+    useTailwind: true,
   },
 };
 
@@ -188,6 +189,7 @@ export const VibrantGradient: Story = {
     searchable: true,
     exportable: true,
     theme: vibrantTailwindTheme,
+    useTailwind: true,
   },
 };
 
@@ -202,6 +204,7 @@ export const Glassmorphism: Story = {
     searchable: true,
     exportable: true,
     theme: glassmorphismTheme,
+    useTailwind: true,
   },
   decorators: [
     (Story) => (
@@ -228,6 +231,7 @@ export const TailwindUtilities: Story = {
     searchable: true,
     exportable: true,
     className: "border-4 border-indigo-500 rounded-2xl shadow-2xl",
+    useTailwind: true,
     theme: {
       header: "bg-indigo-600 text-white",
       row: "hover:bg-indigo-50 hover:shadow-md transition-all duration-300",
@@ -249,6 +253,7 @@ export const ResponsiveTailwind: Story = {
     searchable: true,
     exportable: true,
     className: "mx-auto max-w-7xl",
+    useTailwind: true,
     theme: {
       container: "bg-white rounded-lg md:rounded-xl shadow-sm md:shadow-lg border border-gray-200",
       toolbar: "p-3 md:p-4 bg-gray-50 md:bg-white",
