@@ -99,7 +99,8 @@
 
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
-  .datatable-pagination {
+  .datatable-pagination.use-tailwind,
+  .datatable-pagination:not(.use-css) {
     @apply flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200;
 
     .pagination-info {

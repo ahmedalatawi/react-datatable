@@ -96,7 +96,8 @@
 
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
-  .export-menu-container {
+  .export-menu-container.use-tailwind,
+  .export-menu-container:not(.use-css) {
     @apply relative inline-block;
 
     .export-button {

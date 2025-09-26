@@ -21,7 +21,7 @@
     user-select: none;
     display: flex;
     align-items: center;
-    height: 48px;
+    // height: 48px;
     border-right: 1px solid rgba(229, 231, 235, 0.5);
 
     &:last-child {
@@ -102,7 +102,8 @@
 
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
-  .datatable-header {
+  .datatable-header.use-tailwind,
+  .datatable-header:not(.use-css) {
     @apply bg-gray-50 border-b border-gray-200 shadow-[0_1px_2px_rgba(0,0,0,0.05)];
 
     .header-row {

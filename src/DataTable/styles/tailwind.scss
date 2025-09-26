@@ -1,5 +1,6 @@
 /* Tailwind-specific overrides and utilities */
-.datatable-container.use-tailwind {
+.datatable-container.use-tailwind,
+.datatable-container:not(.use-css) {
   @apply w-full bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col relative;
   height: calc(100vh - 2rem);
 

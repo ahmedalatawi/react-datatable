@@ -34,7 +34,7 @@
       background-color: #f9fafb;
       transition: all 0.15s ease;
       line-height: 1.5;
-      height: 2.5rem;
+      min-height: 1.6rem;
 
       &::placeholder {
         color: #9ca3af;
@@ -57,7 +57,8 @@
 
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
-  .datatable-search {
+  .datatable-search.use-tailwind,
+  .datatable-search:not(.use-css) {
     @apply flex items-center justify-between px-2;
 
     .search-wrapper {

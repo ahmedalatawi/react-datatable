@@ -66,7 +66,8 @@
 
 /* Tailwind overrides when available */
 @supports (color: #3b82f6) {
-  .loading-spinner {
+  .loading-spinner.use-tailwind,
+  .loading-spinner:not(.use-css) {
     @apply flex flex-col items-center justify-center gap-4;
 
     .spinner {
