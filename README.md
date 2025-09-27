@@ -6,6 +6,10 @@ A powerful and flexible React DataTable component with built-in virtualization, 
 
 [DataTable Storybook](https://react-datatable-storybook.netlify.app)
 
+[Codesandbox using CSS](https://codesandbox.io/p/sandbox/kjj4ld)
+
+[Codesandbox using Tailwind](https://codesandbox.io/p/devbox/festive-tess-928f89)
+
 ## Features
 
 - 📦 **Virtual Scrolling**: Efficiently handle large datasets with virtualized rendering
@@ -79,11 +83,7 @@ If you prefer to use Tailwind CSS utilities, set the `useTailwind` prop to `true
 import { DataTable } from "@atawi/react-datatable";
 import "@atawi/react-datatable/dist/style.css";
 
-<DataTable
-  data={data}
-  columns={columns}
-  useTailwind={true}
-/>
+<DataTable data={data} columns={columns} useTailwind={true} />;
 ```
 
 **Note:** When using `useTailwind={true}`, make sure your project has Tailwind CSS installed and configured.
