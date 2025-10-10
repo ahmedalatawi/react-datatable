@@ -15,6 +15,7 @@ interface TableHeaderProps<T> {
   onFilterChange: (columnKey: keyof T, filter: Filter<T> | null) => void;
   uniqueColumnValues: Map<keyof T, Set<string | number>>;
   useTailwind?: boolean;
+  hasRowActions?: boolean;
 }
 
 export function TableHeader<T>({
@@ -30,6 +31,7 @@ export function TableHeader<T>({
   onFilterChange,
   uniqueColumnValues,
   useTailwind = false,
+  hasRowActions = false,
 }: TableHeaderProps<T>) {
   return (
     <div className={`datatable-header ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme} ${sticky ? "sticky" : ""}`}>
@@ -102,6 +104,11 @@ export function TableHeader<T>({
             </div>
           </div>
         ))}
+        {hasRowActions && (
+          <div className="header-cell actions-cell" style={{ width: '80px', flexShrink: 0 }}>
+            <span className="header-text">Actions</span>
+          </div>
+        )}
       </div>
     </div>
   );

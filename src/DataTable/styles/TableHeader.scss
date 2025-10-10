@@ -28,6 +28,11 @@
       border-right: none;
     }
 
+    &.actions-cell {
+      justify-content: flex-end;
+      padding-right: 1rem;
+    }
+
     &.sortable {
       .header-text-wrapper {
         cursor: pointer;
@@ -124,6 +129,10 @@
 
       &:last-child {
         @apply border-r-[none];
+      }
+
+      &.actions-cell {
+        @apply justify-end pr-4;
       }
 
       &.sortable {

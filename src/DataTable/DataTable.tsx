@@ -240,6 +240,7 @@ export function DataTable<T extends { id: string | number }>({
           onFilterChange={handleFilterChange}
           uniqueColumnValues={uniqueColumnValues}
           useTailwind={useTailwind}
+          hasRowActions={!!(rowActions || onRowNavigate)}
         />
       </div>
 
