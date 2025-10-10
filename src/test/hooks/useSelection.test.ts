@@ -64,6 +64,9 @@ describe("useSelection", () => {
 
     act(() => {
       result.current.handleSelectAll();
+    });
+
+    act(() => {
       result.current.handleSelectAll();
     });
 

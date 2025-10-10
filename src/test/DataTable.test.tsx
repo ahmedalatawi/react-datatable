@@ -90,14 +90,20 @@ describe("DataTable", () => {
     const filterButton = screen.getAllByLabelText(/Filter/)[0];
     await userEvent.click(filterButton);
 
+    const operatorSelect = screen.getByDisplayValue("Equals");
+    await userEvent.selectOptions(operatorSelect, "contains");
+
     const filterInput = screen.getByPlaceholderText("Filter value...");
     await userEvent.type(filterInput, "John");
 
     const applyButton = screen.getByText("Apply");
     await userEvent.click(applyButton);
 
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
-    expect(screen.queryByText("Jane Smith")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("John Doe")).toBeInTheDocument();
+      expect(screen.getByText("Bob Johnson")).toBeInTheDocument();
+      expect(screen.queryByText("Jane Smith")).not.toBeInTheDocument();
+    });
   });
 
   test.skip("handles pagination", async () => {

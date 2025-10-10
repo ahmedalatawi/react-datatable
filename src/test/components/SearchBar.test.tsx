@@ -21,7 +21,11 @@ describe("SearchBar", () => {
     render(<SearchBar {...defaultProps} />);
     const input = screen.getByPlaceholderText("Search...");
     await userEvent.type(input, "test");
-    expect(defaultProps.onChange).toHaveBeenCalledWith("test");
+    expect(defaultProps.onChange).toHaveBeenCalled();
+    expect(defaultProps.onChange).toHaveBeenNthCalledWith(1, "t");
+    expect(defaultProps.onChange).toHaveBeenNthCalledWith(2, "e");
+    expect(defaultProps.onChange).toHaveBeenNthCalledWith(3, "s");
+    expect(defaultProps.onChange).toHaveBeenNthCalledWith(4, "t");
   });
 
   it("displays custom placeholder", () => {
@@ -30,8 +34,9 @@ describe("SearchBar", () => {
   });
 
   it("shows search icon", () => {
-    render(<SearchBar {...defaultProps} />);
-    expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
+    const { container } = render(<SearchBar {...defaultProps} />);
+    const searchIcon = container.querySelector('.search-icon svg');
+    expect(searchIcon).toBeInTheDocument();
   });
 
   it("reflects controlled value", () => {

@@ -69,9 +69,9 @@ describe("TableHeader", () => {
   });
 
   it("applies custom styles", () => {
-    render(<TableHeader {...defaultProps} theme="custom-theme" />);
-    const header = screen.getByRole("row");
-    expect(header.parentElement).toHaveClass("custom-theme");
+    const { container } = render(<TableHeader {...defaultProps} theme="custom-theme" />);
+    const header = container.querySelector('.datatable-header');
+    expect(header).toHaveClass("custom-theme");
   });
 
   it("applies CSS classes by default", () => {

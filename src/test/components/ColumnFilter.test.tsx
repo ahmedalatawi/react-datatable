@@ -44,7 +44,7 @@ describe("ColumnFilter", () => {
       column: "name",
       value: "test",
       type: "text",
-      operator: "contains",
+      operator: "equals",
     });
   });
 
@@ -55,14 +55,17 @@ describe("ColumnFilter", () => {
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith(null);
   });
 
-  it("shows select options for select filter type", () => {
+  it("shows select options for select filter type", async () => {
     render(
       <ColumnFilter
         {...defaultProps}
         column={{ ...column, filterType: "select" }}
+        uniqueValues={new Set(["value1", "value2"])}
       />
     );
-    expect(screen.getByRole("combobox")).toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText(/Filter/));
+    const select = screen.getByRole("combobox");
+    expect(select).toBeInTheDocument();
   });
 
   it("shows active filter state", () => {

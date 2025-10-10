@@ -32,10 +32,11 @@ describe("DataTable Sorting", () => {
     const nameHeader = screen.getByText("Name");
     await userEvent.click(nameHeader);
 
-    const cells = screen.getAllByRole("cell");
+    let cells = screen.getAllByRole("cell");
     expect(cells[0]).toHaveTextContent("Bob Johnson");
 
     await userEvent.click(nameHeader);
+    cells = screen.getAllByRole("cell");
     expect(cells[0]).toHaveTextContent("John Doe");
   });
 

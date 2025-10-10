@@ -23,8 +23,9 @@ describe("useDataTableLogic", () => {
       result.current.handleSearch("John");
     });
 
-    expect(result.current.filteredData).toHaveLength(1);
-    expect(result.current.filteredData[0].name).toBe("John Doe");
+    expect(result.current.filteredData).toHaveLength(2);
+    expect(result.current.filteredData.map(d => d.name)).toContain("John Doe");
+    expect(result.current.filteredData.map(d => d.name)).toContain("Bob Johnson");
   });
 
   it("handles column filtering", () => {
@@ -41,8 +42,9 @@ describe("useDataTableLogic", () => {
       });
     });
 
-    expect(result.current.filteredData).toHaveLength(1);
-    expect(result.current.filteredData[0].name).toBe("John Doe");
+    expect(result.current.filteredData).toHaveLength(2);
+    expect(result.current.filteredData.map(d => d.name)).toContain("John Doe");
+    expect(result.current.filteredData.map(d => d.name)).toContain("Bob Johnson");
   });
 
   it("handles row expansion", () => {
