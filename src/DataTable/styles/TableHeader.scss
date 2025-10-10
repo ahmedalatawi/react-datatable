@@ -72,21 +72,30 @@
       .header-text-wrapper {
         display: flex;
         align-items: center;
-        flex-grow: 1;
-        gap: 0.5rem;
+        flex: 1;
+        min-width: 0;
       }
 
       .header-text {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        flex-grow: 1;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        flex-shrink: 0;
+        margin-left: auto;
       }
 
       .sort-icons {
         flex-shrink: 0;
         color: #9ca3af;
         transition: color 0.15s ease;
+        display: flex;
+        align-items: center;
 
         svg {
           transition: transform 0.15s ease;
@@ -137,15 +146,19 @@
         @apply flex items-center justify-between w-full gap-2;
 
         .header-text-wrapper {
-          @apply flex items-center flex-grow gap-2;
+          @apply flex items-center flex-1 min-w-0;
         }
 
         .header-text {
-          @apply truncate flex-grow;
+          @apply truncate;
+        }
+
+        .header-actions {
+          @apply flex items-center gap-1 flex-shrink-0 ml-auto;
         }
 
         .sort-icons {
-          @apply flex-shrink-0 text-gray-400 transition-colors duration-150;
+          @apply flex-shrink-0 text-gray-400 transition-colors duration-150 flex items-center;
 
           svg {
             @apply transition-transform duration-150;

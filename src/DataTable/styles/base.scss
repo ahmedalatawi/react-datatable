@@ -10,6 +10,7 @@
   flex-direction: column;
   height: calc(100vh - 2rem);
   position: relative;
+  overflow: hidden;
 
   .datatable-toolbar {
     padding: 1rem;
@@ -27,6 +28,8 @@
   .datatable-header-wrapper {
     background: white;
     z-index: 30;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     &.sticky {
       position: sticky;
@@ -36,6 +39,23 @@
         top: 4rem;
       }
     }
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+
+      &:hover {
+        background: #555;
+      }
+    }
   }
 
   .datatable-body {
@@ -43,6 +63,29 @@
     position: relative;
     overflow: hidden;
     min-height: 200px;
+
+    .react-window-container {
+      overflow-x: auto !important;
+      overflow-y: auto !important;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+
+        &:hover {
+          background: #555;
+        }
+      }
+    }
 
     .virtual-row {
       transition: background-color 0.15s ease;
@@ -178,20 +221,73 @@
 }
 
 /* Responsive styles */
-@media (max-width: 640px) {
-  .datatable-container {
+@media (max-width: 768px) {
+  .datatable-container.use-css,
+  .datatable-container:not(.use-tailwind) {
     .datatable-toolbar {
       padding: 0.75rem;
       min-height: 3.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .virtual-cell {
-      padding: 0.5rem 0.75rem;
+    .datatable-header {
+      .header-cell {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    .datatable-body {
+      .virtual-cell {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+      }
     }
 
     .datatable-header-wrapper {
       &.sticky.with-toolbar {
         top: 3.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .datatable-container.use-css,
+  .datatable-container:not(.use-tailwind) {
+    .datatable-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .datatable-header {
+      .header-cell {
+        padding: 0.5rem;
+        font-size: 0.65rem;
+        min-width: 100px;
+
+        .header-content {
+          gap: 0.25rem;
+        }
+      }
+
+      .checkbox-cell {
+        width: 3rem;
+        padding: 0 0.5rem;
+      }
+    }
+
+    .datatable-body {
+      .virtual-cell {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        min-width: 100px;
+      }
+
+      .checkbox-cell {
+        width: 3rem;
+        padding: 0 0.5rem;
       }
     }
   }

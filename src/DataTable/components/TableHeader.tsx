@@ -72,6 +72,8 @@ export function TableHeader<T>({
                 }
               >
                 <span className="header-text">{column.header}</span>
+              </div>
+              <div className="header-actions">
                 {column.sortable && (
                   <span className="sort-icons">
                     {sortConfig?.key === column.key ? (
@@ -85,18 +87,18 @@ export function TableHeader<T>({
                     )}
                   </span>
                 )}
+                {column.filterable && (
+                  <ColumnFilter
+                    column={column}
+                    onFilterChange={(filter) =>
+                      onFilterChange(column.key, filter)
+                    }
+                    currentFilter={filters.get(column.key) || null}
+                    uniqueValues={uniqueColumnValues.get(column.key)}
+                    useTailwind={useTailwind}
+                  />
+                )}
               </div>
-              {column.filterable && (
-                <ColumnFilter
-                  column={column}
-                  onFilterChange={(filter) =>
-                    onFilterChange(column.key, filter)
-                  }
-                  currentFilter={filters.get(column.key) || null}
-                  uniqueValues={uniqueColumnValues.get(column.key)}
-                  useTailwind={useTailwind}
-                />
-              )}
             </div>
           </div>
         ))}

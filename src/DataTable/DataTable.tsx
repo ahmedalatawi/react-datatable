@@ -250,6 +250,7 @@ export function DataTable<T extends { id: string | number }>({
                 itemCount={displayData.length}
                 itemSize={getItemSize}
                 overscanCount={OVERSCAN_COUNT}
+                className="react-window-container"
               >
                 {Row}
               </List>
