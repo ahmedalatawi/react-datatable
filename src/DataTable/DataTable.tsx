@@ -193,38 +193,30 @@ export function DataTable<T extends { id: string | number }>({
     >
       {(showToolbar || toolbarLeft || toolbarRight) && (
         <div className={`datatable-toolbar ${theme?.toolbar || ""}`}>
-          {(toolbarLeft || toolbarRight) && (
-            <div className="toolbar-row">
-              <div className="toolbar-left">{toolbarLeft}</div>
-              <div className="toolbar-right">{toolbarRight}</div>
-            </div>
-          )}
-          {(searchable || exportable) && (
-            <div className="toolbar-row">
-              <div className="toolbar-left">
-                {searchable && (
-                  <SearchBar
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    placeholder={searchPlaceholder}
-                    theme={theme?.searchBar}
-                    useTailwind={useTailwind}
-                  />
-                )}
-              </div>
-              <div className="toolbar-right">
-                {exportable && (
-                  <ExportMenu
-                    data={data}
-                    columns={columns}
-                    filename={exportFilename}
-                    theme={theme?.exportMenu}
-                    useTailwind={useTailwind}
-                  />
-                )}
-              </div>
-            </div>
-          )}
+          <div className="toolbar-left">
+            {toolbarLeft}
+            {searchable && (
+              <SearchBar
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder={searchPlaceholder}
+                theme={theme?.searchBar}
+                useTailwind={useTailwind}
+              />
+            )}
+          </div>
+          <div className="toolbar-right">
+            {toolbarRight}
+            {exportable && (
+              <ExportMenu
+                data={data}
+                columns={columns}
+                filename={exportFilename}
+                theme={theme?.exportMenu}
+                useTailwind={useTailwind}
+              />
+            )}
+          </div>
         </div>
       )}
 

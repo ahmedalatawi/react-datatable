@@ -1,13 +1,15 @@
 /* Base SearchBar styles */
 .datatable-search.use-css,
 .datatable-search:not(.use-tailwind) {
-  display: inline-block;
-  width: 100%;
-  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
 
   .search-wrapper {
     position: relative;
-    width: 100%;
+    flex: 1;
+    max-width: 28rem;
 
     .search-icon {
       position: absolute;
@@ -57,10 +59,10 @@
 @supports (color: #3b82f6) {
   .datatable-search.use-tailwind,
   .datatable-search:not(.use-css) {
-    @apply inline-block w-full max-w-md;
+    @apply flex items-center justify-between px-2;
 
     .search-wrapper {
-      @apply relative w-full;
+      @apply relative flex-1 max-w-md;
 
       .search-icon {
         @apply absolute left-3 top-3 text-gray-400 pointer-events-none z-10;
