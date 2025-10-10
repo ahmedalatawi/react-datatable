@@ -52,6 +52,11 @@ export function DataTable<T extends { id: string | number }>({
   exportFilename = "table-data",
   disableInternalSearch = false,
   useTailwind = false,
+  rowActions,
+  onRowNavigate,
+  onBulkAction,
+  toolbarLeft,
+  toolbarRight,
 }: DataTableProps<T>) {
   const { sortConfig, handleSort, sortedData } = useSorting(
     data,
@@ -146,6 +151,8 @@ export function DataTable<T extends { id: string | number }>({
                 : `${rowClassName} ${theme?.row || ""}`
             }
             useTailwind={useTailwind}
+            rowActions={rowActions}
+            onNavigate={onRowNavigate}
           />
         </div>
       );
@@ -168,6 +175,8 @@ export function DataTable<T extends { id: string | number }>({
       toggleExpandRow,
       handleRowClick,
       handleKeyPress,
+      rowActions,
+      onRowNavigate,
     ]
   );
 
@@ -182,26 +191,32 @@ export function DataTable<T extends { id: string | number }>({
       aria-label={ariaLabel}
       aria-describedby={ariaDescribedby}
     >
-      {showToolbar && (
+      {(showToolbar || toolbarLeft || toolbarRight) && (
         <div className={`datatable-toolbar ${theme?.toolbar || ""}`}>
-          {searchable && (
-            <SearchBar
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder={searchPlaceholder}
-              theme={theme?.searchBar}
-              useTailwind={useTailwind}
-            />
-          )}
-          {exportable && (
-            <ExportMenu
-              data={data}
-              columns={columns}
-              filename={exportFilename}
-              theme={theme?.exportMenu}
-              useTailwind={useTailwind}
-            />
-          )}
+          <div className="toolbar-left">
+            {toolbarLeft}
+            {searchable && (
+              <SearchBar
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder={searchPlaceholder}
+                theme={theme?.searchBar}
+                useTailwind={useTailwind}
+              />
+            )}
+          </div>
+          <div className="toolbar-right">
+            {toolbarRight}
+            {exportable && (
+              <ExportMenu
+                data={data}
+                columns={columns}
+                filename={exportFilename}
+                theme={theme?.exportMenu}
+                useTailwind={useTailwind}
+              />
+            )}
+          </div>
         </div>
       )}
 

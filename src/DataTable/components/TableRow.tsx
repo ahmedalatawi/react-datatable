@@ -1,6 +1,7 @@
 import React from 'react';
-import { Column } from '../types';
+import { Column, RowAction } from '../types';
 import { ChevronRight, ChevronDown } from '../icons/Icons';
+import { RowActionMenu } from './RowActionMenu';
 
 interface TableRowProps<T> {
   item: T;
@@ -16,6 +17,8 @@ interface TableRowProps<T> {
   expandedContent?: React.ReactNode;
   theme?: string;
   useTailwind?: boolean;
+  rowActions?: RowAction<T>[];
+  onNavigate?: (item: T) => void;
 }
 
 export function TableRow<T>({
@@ -32,6 +35,8 @@ export function TableRow<T>({
   expandedContent,
   theme,
   useTailwind = false,
+  rowActions,
+  onNavigate,
 }: TableRowProps<T>) {
   return (
     <>
@@ -93,6 +98,16 @@ export function TableRow<T>({
               </div>
             </div>
           ))}
+          {(rowActions || onNavigate) && (
+            <div className="virtual-cell actions-cell" style={{ width: '80px', flexShrink: 0 }}>
+              <RowActionMenu
+                item={item}
+                actions={rowActions || []}
+                onNavigate={onNavigate}
+                useTailwind={useTailwind}
+              />
+            </div>
+          )}
         </div>
         {expanded && expandedContent && (
           <div className="expanded-content" role="region" aria-label="Expanded content">

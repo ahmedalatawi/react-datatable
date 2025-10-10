@@ -6,6 +6,11 @@
 @use "TableHeader.scss";
 @use "ColumnFilter.scss";
 @use "LoadingSpinner.scss";
+@use "DropdownFilter.scss";
+@use "ToggleSwitch.scss";
+@use "BulkActionsButton.scss";
+@use "RowActionMenu.scss";
+@use "StatusIndicator.scss";
 
 /* Import Tailwind styles */
 @use "tailwind.scss";

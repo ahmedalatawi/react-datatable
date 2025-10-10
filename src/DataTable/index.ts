@@ -1,5 +1,5 @@
 export { DataTable } from "./DataTable";
-export type { Column, DataTableProps, DataTableTheme, Filter } from "./types";
+export type { Column, DataTableProps, DataTableTheme, Filter, RowAction } from "./types";
 
 // Export individual components for advanced customization
 export { SearchBar } from "./components/SearchBar";
@@ -9,6 +9,11 @@ export { TableHeader } from "./components/TableHeader";
 export { TableRow } from "./components/TableRow";
 export { ColumnFilter } from "./components/ColumnFilter";
 export { LoadingSpinner } from "./components/LoadingSpinner";
+export { DropdownFilter } from "./components/DropdownFilter";
+export { ToggleSwitch } from "./components/ToggleSwitch";
+export { BulkActionsButton } from "./components/BulkActionsButton";
+export { RowActionMenu } from "./components/RowActionMenu";
+export { StatusIndicator } from "./components/StatusIndicator";
 
 // Export hooks for custom implementations
 export { useDataTableLogic } from "./hooks/useDataTableLogic";

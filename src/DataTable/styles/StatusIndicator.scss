@@ -1,0 +1,33 @@
+.status-indicator.use-css,
+.status-indicator:not(.use-tailwind) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    font-size: 0.875rem;
+    color: #374151;
+  }
+}
+
+@supports (color: #3b82f6) {
+  .status-indicator.use-tailwind {
+    @apply inline-flex items-center gap-2;
+
+    .status-dot {
+      @apply inline-block w-2 h-2 rounded-full flex-shrink-0;
+    }
+
+    .status-text {
+      @apply text-sm text-gray-700;
+    }
+  }
+}

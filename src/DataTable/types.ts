@@ -16,6 +16,12 @@ export interface Column<T> {
   ariaLabel?: string;
 }
 
+export interface RowAction<T> {
+  label: string;
+  onClick: (item: T) => void;
+  icon?: ReactNode;
+}
+
 export interface DataTableProps<T> {
   data: T[];
   columns: Column<T>[];
@@ -47,6 +53,11 @@ export interface DataTableProps<T> {
   exportFilename?: string;
   disableInternalSearch?: boolean;
   useTailwind?: boolean;
+  rowActions?: RowAction<T>[];
+  onRowNavigate?: (item: T) => void;
+  onBulkAction?: () => void;
+  toolbarLeft?: ReactNode;
+  toolbarRight?: ReactNode;
 }
 
 export interface DataTableTheme {
