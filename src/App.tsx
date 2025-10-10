@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import { DataTable } from "./DataTable/DataTable";
-import type { Column } from "./DataTable/types";
-import { generateMockData } from "./mockData";
+import {
+  DropdownFilter,
+  ToggleSwitch,
+  BulkActionsButton,
+  StatusIndicator,
+} from "./DataTable";
+import type { Column, RowAction } from "./DataTable/types";
+import { generateMockData, generateInvoiceData } from "./mockData";
 
 const users = generateMockData(50);
 const largeDataset = generateMockData(10000);
+const invoices = generateInvoiceData(28);
 
 function App() {
-  const [activeTab, setActiveTab] = useState<"basic" | "large">("basic");
+  const [activeTab, setActiveTab] = useState<"basic" | "large" | "advanced">(
+    "basic"
+  );
   const [stickyHeader, setStickyHeader] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [invoiceFilter, setInvoiceFilter] = useState("all");
+  const [showOverdue, setShowOverdue] = useState(false);
 
   const columns: Column<any>[] = [
     {
@@ -62,6 +73,54 @@ function App() {
     },
   ];
 
+  const invoiceColumns: Column<any>[] = [
+    {
+      key: "submissionDate",
+      header: "Submission date",
+      sortable: true,
+      searchable: false,
+      width: "15%",
+    },
+    {
+      key: "invoiceNumber",
+      header: "Invoice Number",
+      sortable: true,
+      searchable: true,
+      width: "20%",
+    },
+    {
+      key: "contract",
+      header: "Contract",
+      sortable: true,
+      searchable: true,
+      width: "20%",
+    },
+    {
+      key: "dueDate",
+      header: "Due date",
+      sortable: true,
+      searchable: false,
+      width: "15%",
+    },
+    {
+      key: "amount",
+      header: "Amount",
+      sortable: true,
+      searchable: false,
+      width: "15%",
+      align: "right",
+      render: (value) => `$${Number(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+      searchable: true,
+      width: "15%",
+      render: (value) => <StatusIndicator status={value as string} useTailwind />,
+    },
+  ];
+
   const handleSelectionChange = (selectedItems: any[]) => {
     console.log("Selected items:", selectedItems);
   };
@@ -82,13 +141,37 @@ function App() {
     </div>
   );
 
-  const handleTabChange = async (tab: "basic" | "large") => {
+  const invoiceActions: RowAction<any>[] = [
+    {
+      label: "View Details",
+      onClick: (item) => console.log("View details:", item),
+    },
+    {
+      label: "Edit Invoice",
+      onClick: (item) => console.log("Edit invoice:", item),
+    },
+    {
+      label: "Download PDF",
+      onClick: (item) => console.log("Download PDF:", item),
+    },
+    {
+      label: "Send Reminder",
+      onClick: (item) => console.log("Send reminder:", item),
+    },
+  ];
+
+  const handleTabChange = async (tab: "basic" | "large" | "advanced") => {
     setLoading(true);
     setActiveTab(tab);
-    // Simulate loading delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
   };
+
+  const filteredInvoices = invoices.filter((invoice) => {
+    if (invoiceFilter !== "all" && invoice.type !== invoiceFilter) return false;
+    if (showOverdue && invoice.status !== "Not Paid") return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -118,6 +201,16 @@ function App() {
                 }`}
               >
                 Large Dataset (10,000 rows)
+              </button>
+              <button
+                onClick={() => handleTabChange("advanced")}
+                className={`px-4 py-2 rounded-lg ${
+                  activeTab === "advanced"
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                Advanced Features
               </button>
             </div>
             <div className="flex items-center space-x-2">
@@ -166,7 +259,7 @@ function App() {
               useTailwind={true}
             />
           </div>
-        ) : (
+        ) : activeTab === "large" ? (
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-semibold mb-4">
               Large Dataset Performance
@@ -191,6 +284,63 @@ function App() {
               exportable={false}
               loading={loading}
               useTailwind={true}
+            />
+          </div>
+        ) : (
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-xl font-semibold mb-4">
+              Advanced Features - Invoice Management
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Showcases dropdown filters, toggle switches, bulk actions, row action menus,
+              and status indicators - similar to modern SaaS applications.
+            </p>
+            <DataTable
+              data={filteredInvoices}
+              columns={invoiceColumns}
+              pageSize={10}
+              selectable={true}
+              onSelectionChange={handleSelectionChange}
+              onPageChange={(page) => console.log("Page changed:", page)}
+              defaultSortColumn="submissionDate"
+              defaultSortDirection="desc"
+              stickyHeader={stickyHeader}
+              searchable={true}
+              searchPlaceholder="Search invoices..."
+              exportable={true}
+              exportFilename="invoices-data"
+              loading={loading}
+              useTailwind={true}
+              rowActions={invoiceActions}
+              onRowNavigate={(item) => console.log("Navigate to:", item)}
+              onBulkAction={() => console.log("Bulk action clicked")}
+              toolbarLeft={
+                <>
+                  <DropdownFilter
+                    value={invoiceFilter}
+                    onChange={setInvoiceFilter}
+                    options={[
+                      { label: "All invoices", value: "all" },
+                      { label: "Time tracking", value: "time" },
+                      { label: "Fixed price", value: "fixed" },
+                      { label: "Milestone", value: "milestone" },
+                    ]}
+                    useTailwind
+                  />
+                  <ToggleSwitch
+                    checked={showOverdue}
+                    onChange={setShowOverdue}
+                    label="Show only overdue"
+                    useTailwind
+                  />
+                </>
+              }
+              toolbarRight={
+                <BulkActionsButton
+                  onClick={() => console.log("Bulk actions menu")}
+                  useTailwind
+                />
+              }
             />
           </div>
         )}
