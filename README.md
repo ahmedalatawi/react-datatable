@@ -1,6 +1,6 @@
 ![](https://github.com/AhmedAlatawi/react-datatable/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/github/ahmedalatawi/react-datatable/graph/badge.svg?token=95A4BRXOT5)](https://codecov.io/github/ahmedalatawi/react-datatable)
-[![License: MIT](https://img.shields.io/github/license/AhmedAlatawi/react-datatable)](https://github.com/AhmedAlatawi/react-datatable/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/AhmedAlatawi/react-datatable/blob/master/LICENSE)
 
 # React Datatable
 
