@@ -54,7 +54,7 @@ export function DataTable<T extends { id: string | number }>({
   useTailwind = false,
   rowActions,
   onRowNavigate,
-  onBulkAction,
+  //onBulkAction, //TODO: Future feature
   toolbarLeft,
   toolbarRight,
 }: DataTableProps<T>) {

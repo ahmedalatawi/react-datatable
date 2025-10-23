@@ -1,3 +1,7 @@
+![](https://github.com/AhmedAlatawi/react-datatable/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/ahmedalatawi/react-datatable/graph/badge.svg?token=95A4BRXOT5)](https://codecov.io/github/ahmedalatawi/react-datatable)
+[![License: MIT](https://img.shields.io/github/license/AhmedAlatawi/react-datatable)](https://github.com/AhmedAlatawi/react-datatable/blob/master/LICENSE)
+
 # React Datatable
 
 A powerful and flexible React DataTable component with built-in virtualization, sorting, filtering, and more. Built for performance and scalability, handling large datasets with ease.

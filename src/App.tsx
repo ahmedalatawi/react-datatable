@@ -9,6 +9,30 @@ import {
 import type { Column, RowAction } from "./DataTable/types";
 import { generateMockData, generateInvoiceData } from "./mockData";
 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  lastLogin: string;
+  details: {
+    location: string;
+    department: string;
+  };
+};
+
+type Invoice = {
+  id: number;
+  submissionDate: string;
+  invoiceNumber: string;
+  contract: string;
+  dueDate: string;
+  amount: number;
+  status: string;
+  type: string;
+};
+
 const users = generateMockData(50);
 const largeDataset = generateMockData(10000);
 const invoices = generateInvoiceData(28);
@@ -22,7 +46,7 @@ function App() {
   const [invoiceFilter, setInvoiceFilter] = useState("all");
   const [showOverdue, setShowOverdue] = useState(false);
 
-  const columns: Column<any>[] = [
+  const columns: Column<User>[] = [
     {
       key: "name",
       header: "Name",
@@ -59,7 +83,7 @@ function App() {
               : "bg-red-100 text-red-800"
           }`}
         >
-          {value}
+          {typeof value === "string" ? value : ""}
         </span>
       ),
     },
@@ -73,7 +97,7 @@ function App() {
     },
   ];
 
-  const invoiceColumns: Column<any>[] = [
+  const invoiceColumns: Column<Invoice>[] = [
     {
       key: "submissionDate",
       header: "Submission date",
@@ -109,7 +133,11 @@ function App() {
       searchable: false,
       width: "15%",
       align: "right",
-      render: (value) => `$${Number(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+      render: (value) =>
+        `$${Number(value).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}`,
     },
     {
       key: "status",
@@ -117,15 +145,17 @@ function App() {
       sortable: true,
       searchable: true,
       width: "15%",
-      render: (value) => <StatusIndicator status={value as string} useTailwind />,
+      render: (value) => (
+        <StatusIndicator status={value as string} useTailwind />
+      ),
     },
   ];
 
-  const handleSelectionChange = (selectedItems: any[]) => {
+  const handleSelectionChange = (selectedItems: User[] | Invoice[]) => {
     console.log("Selected items:", selectedItems);
   };
 
-  const expandedContent = (item: any) => (
+  const expandedContent = (item: User) => (
     <div className="p-4 bg-gray-50">
       <h3 className="text-lg font-semibold mb-2">Additional Details</h3>
       <div className="grid grid-cols-2 gap-4">
@@ -141,7 +171,7 @@ function App() {
     </div>
   );
 
-  const invoiceActions: RowAction<any>[] = [
+  const invoiceActions: RowAction<Invoice>[] = [
     {
       label: "View Details",
       onClick: (item) => console.log("View details:", item),
@@ -292,8 +322,9 @@ function App() {
               Advanced Features - Invoice Management
             </h2>
             <p className="text-gray-600 mb-6">
-              Showcases dropdown filters, toggle switches, bulk actions, row action menus,
-              and status indicators - similar to modern SaaS applications.
+              Showcases dropdown filters, toggle switches, bulk actions, row
+              action menus, and status indicators - similar to modern SaaS
+              applications.
             </p>
             <DataTable
               data={filteredInvoices}

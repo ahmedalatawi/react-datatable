@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useCallback, useMemo } from "react";
 import { Column, Filter } from "../types";
 
@@ -93,6 +94,7 @@ export function ColumnFilter<T>({
 
       {isOpen && (
         <>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div className="filter-overlay" onClick={() => setIsOpen(false)} />
           <div className="filter-dropdown">
             <div className="filter-content">

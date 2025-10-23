@@ -1,10 +1,10 @@
-import { vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { mockData } from "../mocks/tableData";
 import { useSorting } from "../../DataTable/hooks/useSorting";
 
 describe("useSorting", () => {
-  it("initializes with default sort config", () => {
+  test("initializes with default sort config", () => {
     const { result } = renderHook(() =>
       useSorting(mockData, "name", "asc", true)
     );
@@ -14,7 +14,7 @@ describe("useSorting", () => {
     });
   });
 
-  it("sorts data ascending", () => {
+  test("sorts data ascending", () => {
     const { result } = renderHook(() =>
       useSorting(mockData, undefined, "asc", true)
     );
@@ -26,7 +26,7 @@ describe("useSorting", () => {
     expect(result.current.sortedData[0].name).toBe("Bob Johnson");
   });
 
-  it("toggles sort direction", () => {
+  test("toggles sort direction", () => {
     const { result } = renderHook(() =>
       useSorting(mockData, undefined, "asc", true)
     );
@@ -40,7 +40,7 @@ describe("useSorting", () => {
     expect(result.current.sortedData[0].name).toBe("John Doe");
   });
 
-  it("disables sorting when enabled is false", () => {
+  test("disables sorting when enabled is false", () => {
     const { result } = renderHook(() =>
       useSorting(mockData, undefined, "asc", false)
     );

@@ -1,13 +1,12 @@
-import { vi } from "vitest";
-import React from "react";
+import { describe, expect, test, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Column, Filter } from "../../DataTable/types";
 import { ColumnFilter } from "../../DataTable/components/ColumnFilter";
 
 describe("ColumnFilter", () => {
-  const column: Column<any> = {
-    key: "name",
+  const column: Column<string> = {
+    key: "name" as keyof string,
     header: "Name",
     filterable: true,
   };
@@ -15,23 +14,23 @@ describe("ColumnFilter", () => {
   const defaultProps = {
     column,
     onFilterChange: vi.fn(),
-    currentFilter: null as Filter<any> | null,
+    currentFilter: null as Filter<string> | null,
     uniqueValues: new Set(["value1", "value2"]),
     useTailwind: false,
   };
 
-  it("renders filter button", () => {
+  test("renders filter button", () => {
     render(<ColumnFilter {...defaultProps} />);
     expect(screen.getByLabelText(/Filter/)).toBeInTheDocument();
   });
 
-  it("shows filter options when clicked", async () => {
+  test("shows filter options when clicked", async () => {
     render(<ColumnFilter {...defaultProps} />);
     await userEvent.click(screen.getByLabelText(/Filter/));
     expect(screen.getByText("Contains")).toBeInTheDocument();
   });
 
-  it("handles filter application", async () => {
+  test("handles filter application", async () => {
     render(<ColumnFilter {...defaultProps} />);
     await userEvent.click(screen.getByLabelText(/Filter/));
     await userEvent.type(
@@ -48,14 +47,14 @@ describe("ColumnFilter", () => {
     });
   });
 
-  it("handles filter clearing", async () => {
+  test("handles filter clearing", async () => {
     render(<ColumnFilter {...defaultProps} />);
     await userEvent.click(screen.getByLabelText(/Filter/));
     await userEvent.click(screen.getByText("Clear"));
     expect(defaultProps.onFilterChange).toHaveBeenCalledWith(null);
   });
 
-  it("shows select options for select filter type", async () => {
+  test("shows select options for select filter type", async () => {
     render(
       <ColumnFilter
         {...defaultProps}
@@ -68,12 +67,12 @@ describe("ColumnFilter", () => {
     expect(select).toBeInTheDocument();
   });
 
-  it("shows active filter state", () => {
+  test("shows active filter state", () => {
     render(
       <ColumnFilter
         {...defaultProps}
         currentFilter={{
-          column: "name",
+          column: "name" as keyof string,
           value: "test",
           type: "text",
           operator: "contains",
@@ -83,15 +82,17 @@ describe("ColumnFilter", () => {
     expect(screen.getByLabelText(/Filter/)).toHaveClass("active");
   });
 
-  it("applies CSS classes by default", () => {
+  test("applies CSS classes by default", () => {
     const { container } = render(<ColumnFilter {...defaultProps} />);
-    const filterContainer = container.querySelector('.column-filter');
-    expect(filterContainer).toHaveClass('use-css');
+    const filterContainer = container.querySelector(".column-filter");
+    expect(filterContainer).toHaveClass("use-css");
   });
 
-  it("applies Tailwind classes when useTailwind is true", () => {
-    const { container } = render(<ColumnFilter {...defaultProps} useTailwind={true} />);
-    const filterContainer = container.querySelector('.column-filter');
-    expect(filterContainer).toHaveClass('use-tailwind');
+  test("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(
+      <ColumnFilter {...defaultProps} useTailwind={true} />
+    );
+    const filterContainer = container.querySelector(".column-filter");
+    expect(filterContainer).toHaveClass("use-tailwind");
   });
 });

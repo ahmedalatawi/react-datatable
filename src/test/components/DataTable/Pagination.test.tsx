@@ -1,9 +1,16 @@
-import { vi } from "vitest";
-import React from "react";
+import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { generateLargeMockData } from "../../mocks/tableData";
 import { DataTable } from "../../../DataTable/DataTable";
+import { Column } from "../../../DataTable";
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  status: string;
+};
 
 describe("DataTable Pagination", () => {
   const largeData = generateLargeMockData(25);
@@ -14,18 +21,18 @@ describe("DataTable Pagination", () => {
       { key: "name", header: "Name", sortable: true },
       { key: "email", header: "Email", sortable: true },
       { key: "status", header: "Status", sortable: true },
-    ],
+    ] as Column<User>[],
     pageSize: 10,
     useTailwind: false,
   };
 
-  it("shows correct number of items per page", () => {
+  test("shows correct number of items per page", () => {
     render(<DataTable {...defaultProps} />);
     const rows = screen.getAllByRole("row");
     expect(rows).toHaveLength(10);
   });
 
-  it("navigates to next page", async () => {
+  test("navigates to next page", async () => {
     render(<DataTable {...defaultProps} />);
 
     const nextButton = screen.getByLabelText("Next page");
@@ -35,7 +42,7 @@ describe("DataTable Pagination", () => {
     expect(screen.queryByText("Person 1")).not.toBeInTheDocument();
   });
 
-  it("navigates to previous page", async () => {
+  test("navigates to previous page", async () => {
     render(<DataTable {...defaultProps} />);
 
     const nextButton = screen.getByLabelText("Next page");
@@ -48,7 +55,7 @@ describe("DataTable Pagination", () => {
     expect(screen.queryByText("Person 11")).not.toBeInTheDocument();
   });
 
-  it("jumps to specific page", async () => {
+  test("jumps to specific page", async () => {
     render(<DataTable {...defaultProps} />);
 
     const pageThreeButton = screen.getByText("3");

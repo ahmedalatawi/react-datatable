@@ -1,6 +1,5 @@
-import { vi } from "vitest";
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Column } from "../../DataTable/types";
 import { TableHeader } from "../../DataTable/components/TableHeader";
@@ -31,20 +30,20 @@ describe("TableHeader", () => {
     useTailwind: false,
   };
 
-  it("renders all columns", () => {
+  test("renders all columns", () => {
     render(<TableHeader {...defaultProps} />);
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("Email")).toBeInTheDocument();
   });
 
-  it("handles select all checkbox", async () => {
+  test("handles select all checkbox", async () => {
     render(<TableHeader {...defaultProps} />);
     const checkbox = screen.getByRole("checkbox");
     await userEvent.click(checkbox);
     expect(defaultProps.onSelectAll).toHaveBeenCalled();
   });
 
-  it("shows sort indicators", () => {
+  test("shows sort indicators", () => {
     render(
       <TableHeader
         {...defaultProps}
@@ -55,34 +54,38 @@ describe("TableHeader", () => {
     expect(nameHeader).toHaveAttribute("aria-sort", "ascending");
   });
 
-  it("handles column sorting", async () => {
+  test("handles column sorting", async () => {
     render(<TableHeader {...defaultProps} />);
     const nameHeader = screen.getByText("Name").closest('[role="button"]');
     await userEvent.click(nameHeader!);
     expect(defaultProps.onSort).toHaveBeenCalledWith("name");
   });
 
-  it("shows filter buttons for filterable columns", () => {
+  test("shows filter buttons for filterable columns", () => {
     render(<TableHeader {...defaultProps} />);
     const filterButtons = screen.getAllByLabelText(/Filter/);
-    expect(filterButtons).toHaveLength(1); // Only name column is filterable
+    expect(filterButtons).toHaveLength(1);
   });
 
-  it("applies custom styles", () => {
-    const { container } = render(<TableHeader {...defaultProps} theme="custom-theme" />);
-    const header = container.querySelector('.datatable-header');
+  test("applies custom styles", () => {
+    const { container } = render(
+      <TableHeader {...defaultProps} theme="custom-theme" />
+    );
+    const header = container.querySelector(".datatable-header");
     expect(header).toHaveClass("custom-theme");
   });
 
-  it("applies CSS classes by default", () => {
+  test("applies CSS classes by default", () => {
     const { container } = render(<TableHeader {...defaultProps} />);
-    const headerContainer = container.querySelector('.datatable-header');
-    expect(headerContainer).toHaveClass('use-css');
+    const headerContainer = container.querySelector(".datatable-header");
+    expect(headerContainer).toHaveClass("use-css");
   });
 
-  it("applies Tailwind classes when useTailwind is true", () => {
-    const { container } = render(<TableHeader {...defaultProps} useTailwind={true} />);
-    const headerContainer = container.querySelector('.datatable-header');
-    expect(headerContainer).toHaveClass('use-tailwind');
+  test("applies Tailwind classes when useTailwind is true", () => {
+    const { container } = render(
+      <TableHeader {...defaultProps} useTailwind={true} />
+    );
+    const headerContainer = container.querySelector(".datatable-header");
+    expect(headerContainer).toHaveClass("use-tailwind");
   });
 });

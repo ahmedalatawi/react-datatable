@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from "react";
 import { utils, write } from "xlsx";
 import { Column } from "../types";
@@ -92,7 +93,11 @@ export function ExportMenu<T>({
   };
 
   return (
-    <div className={`export-menu-container ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme}`}>
+    <div
+      className={`export-menu-container ${
+        useTailwind ? "use-tailwind" : "use-css"
+      } ${theme}`}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="export-button"
@@ -118,6 +123,7 @@ export function ExportMenu<T>({
 
       {isOpen && (
         <>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
             className="export-menu-overlay"
             onClick={() => setIsOpen(false)}

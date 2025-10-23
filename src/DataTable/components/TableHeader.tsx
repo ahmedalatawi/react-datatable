@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Column, Filter } from "../types";
 import { ChevronUp, ChevronDown } from "../icons/Icons";
 import { ColumnFilter } from "./ColumnFilter";
@@ -34,7 +35,11 @@ export function TableHeader<T>({
   hasRowActions = false,
 }: TableHeaderProps<T>) {
   return (
-    <div className={`datatable-header ${useTailwind ? 'use-tailwind' : 'use-css'} ${theme} ${sticky ? "sticky" : ""}`}>
+    <div
+      className={`datatable-header ${
+        useTailwind ? "use-tailwind" : "use-css"
+      } ${theme} ${sticky ? "sticky" : ""}`}
+    >
       <div className="header-row">
         {selectable && (
           <div className="header-cell checkbox-cell">
@@ -77,7 +82,13 @@ export function TableHeader<T>({
               </div>
               <div className="header-actions">
                 {column.sortable && (
-                  <span className="sort-icons">
+                  <span
+                    className="sort-icons"
+                    onClick={() => onSort?.(column.key)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Sort by ${String(column.header)}`}
+                  >
                     {sortConfig?.key === column.key ? (
                       sortConfig.direction === "asc" ? (
                         <ChevronUp size={14} className="active" />
@@ -105,7 +116,10 @@ export function TableHeader<T>({
           </div>
         ))}
         {hasRowActions && (
-          <div className="header-cell actions-cell" style={{ width: '80px', flexShrink: 0 }}>
+          <div
+            className="header-cell actions-cell"
+            style={{ width: "80px", flexShrink: 0 }}
+          >
             <span className="header-text">Actions</span>
           </div>
         )}

@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { mockData } from "../mocks/tableData";
 import { useDataTableLogic } from "../../DataTable/hooks/useDataTableLogic";
@@ -6,7 +6,7 @@ import { useDataTableLogic } from "../../DataTable/hooks/useDataTableLogic";
 describe("useDataTableLogic", () => {
   const searchableKeys = ["name", "email"];
 
-  it("initializes with empty search term", () => {
+  test("initializes with empty search term", () => {
     const { result } = renderHook(() =>
       useDataTableLogic(mockData, searchableKeys)
     );
@@ -14,7 +14,7 @@ describe("useDataTableLogic", () => {
     expect(result.current.filteredData).toEqual(mockData);
   });
 
-  it("filters data by search term", () => {
+  test("filters data by search term", () => {
     const { result } = renderHook(() =>
       useDataTableLogic(mockData, searchableKeys)
     );
@@ -24,11 +24,15 @@ describe("useDataTableLogic", () => {
     });
 
     expect(result.current.filteredData).toHaveLength(2);
-    expect(result.current.filteredData.map(d => d.name)).toContain("John Doe");
-    expect(result.current.filteredData.map(d => d.name)).toContain("Bob Johnson");
+    expect(result.current.filteredData.map((d) => d.name)).toContain(
+      "John Doe"
+    );
+    expect(result.current.filteredData.map((d) => d.name)).toContain(
+      "Bob Johnson"
+    );
   });
 
-  it("handles column filtering", () => {
+  test("handles column filtering", () => {
     const { result } = renderHook(() =>
       useDataTableLogic(mockData, searchableKeys)
     );
@@ -43,11 +47,15 @@ describe("useDataTableLogic", () => {
     });
 
     expect(result.current.filteredData).toHaveLength(2);
-    expect(result.current.filteredData.map(d => d.name)).toContain("John Doe");
-    expect(result.current.filteredData.map(d => d.name)).toContain("Bob Johnson");
+    expect(result.current.filteredData.map((d) => d.name)).toContain(
+      "John Doe"
+    );
+    expect(result.current.filteredData.map((d) => d.name)).toContain(
+      "Bob Johnson"
+    );
   });
 
-  it("handles row expansion", () => {
+  test("handles row expansion", () => {
     const { result } = renderHook(() =>
       useDataTableLogic(mockData, searchableKeys)
     );
@@ -65,7 +73,7 @@ describe("useDataTableLogic", () => {
     expect(result.current.expandedRows.has(1)).toBe(false);
   });
 
-  it("generates unique column values", () => {
+  test("generates unique column values", () => {
     const { result } = renderHook(() =>
       useDataTableLogic(mockData, searchableKeys)
     );

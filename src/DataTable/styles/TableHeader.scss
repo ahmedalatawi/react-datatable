@@ -98,9 +98,17 @@
       .sort-icons {
         flex-shrink: 0;
         color: #9ca3af;
-        transition: color 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease;
         display: flex;
         align-items: center;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+
+        &:hover {
+          background-color: #e5e7eb;
+          color: #111827;
+        }
 
         svg {
           transition: transform 0.15s ease;
@@ -167,7 +175,12 @@
         }
 
         .sort-icons {
-          @apply flex-shrink-0 text-gray-400 transition-colors duration-150 flex items-center;
+          @apply flex-shrink-0 text-gray-400 transition-colors duration-150 flex items-center cursor-pointer p-1 rounded;
+          transition: color 0.15s ease, background-color 0.15s ease;
+
+          &:hover {
+            @apply bg-gray-200 text-gray-900;
+          }
 
           svg {
             @apply transition-transform duration-150;

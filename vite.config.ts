@@ -29,8 +29,8 @@ export default defineConfig({
           "react/jsx-runtime": "jsx",
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'style.css';
-          return assetInfo.name || 'assets/[name].[ext]';
+          if (assetInfo.name === "style.css") return "style.css";
+          return assetInfo.name || "assets/[name].[ext]";
         },
       },
     },
@@ -44,7 +44,8 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
-      exclude: ["node_modules/", "src/test/", "**/*.d.ts"],
+      exclude: ["node_modules/", "src/test/", "src/stories", "**/*.d.ts"],
+      include: ["src/DataTable"],
     },
     css: {
       modules: {

@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { describe, test, expect } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { generateLargeMockData } from "../mocks/tableData";
 import { usePagination } from "../../DataTable/hooks/usePagination";
@@ -7,7 +7,7 @@ describe("usePagination", () => {
   const data = generateLargeMockData(25);
   const pageSize = 10;
 
-  it("initializes with first page", () => {
+  test("initializes with first page", () => {
     const { result } = renderHook(() => usePagination(data, pageSize, true));
 
     expect(result.current.currentPage).toBe(1);
@@ -15,7 +15,7 @@ describe("usePagination", () => {
     expect(result.current.totalPages).toBe(3);
   });
 
-  it("changes page", () => {
+  test("changes page", () => {
     const { result } = renderHook(() => usePagination(data, pageSize, true));
 
     act(() => {
@@ -26,7 +26,7 @@ describe("usePagination", () => {
     expect(result.current.paginatedData[0].name).toBe("Person 11");
   });
 
-  it("handles invalid page numbers", () => {
+  test("handles invalid page numbers", () => {
     const { result } = renderHook(() => usePagination(data, pageSize, true));
 
     act(() => {
@@ -40,7 +40,7 @@ describe("usePagination", () => {
     expect(result.current.currentPage).toBe(3);
   });
 
-  it("returns all data when pagination is disabled", () => {
+  test("returns all data when pagination is disabled", () => {
     const { result } = renderHook(() => usePagination(data, pageSize, false));
 
     expect(result.current.paginatedData).toEqual(data);

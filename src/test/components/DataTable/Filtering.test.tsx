@@ -1,9 +1,8 @@
-import { vi } from "vitest";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockData, columns } from "../../mocks/tableData";
 import { DataTable } from "../../../DataTable/DataTable";
+import { describe, expect, test } from "vitest";
 
 describe("DataTable Filtering", () => {
   const defaultProps = {
@@ -13,7 +12,7 @@ describe("DataTable Filtering", () => {
     useTailwind: false,
   };
 
-  it("filters data by text search", async () => {
+  test("filters data by text search", async () => {
     render(<DataTable {...defaultProps} />);
 
     const searchInput = screen.getByPlaceholderText("Search...");
@@ -26,7 +25,7 @@ describe("DataTable Filtering", () => {
     });
   });
 
-  it("filters by column", async () => {
+  test("filters by column", async () => {
     render(<DataTable {...defaultProps} />);
 
     const filterButton = screen.getAllByLabelText(/Filter/)[0];
@@ -48,7 +47,7 @@ describe("DataTable Filtering", () => {
     });
   });
 
-  it("clears column filter", async () => {
+  test("clears column filter", async () => {
     render(<DataTable {...defaultProps} />);
 
     const filterButton = screen.getAllByLabelText(/Filter/)[0];

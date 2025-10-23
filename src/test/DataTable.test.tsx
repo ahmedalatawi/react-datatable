@@ -1,9 +1,10 @@
-import { vi } from "vitest";
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, expect, test, vi } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Column } from "../DataTable/types";
 import { DataTable } from "../DataTable/DataTable";
+
+import "@testing-library/jest-dom";
 
 interface TestData {
   id: number;
@@ -38,7 +39,14 @@ const columns: Column<TestData>[] = [
 
 describe("DataTable", () => {
   test("renders table with correct data", async () => {
-    render(<DataTable data={mockData} columns={columns} loading={false} useTailwind={false} />);
+    render(
+      <DataTable
+        data={mockData}
+        columns={columns}
+        loading={false}
+        useTailwind={false}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -46,7 +54,7 @@ describe("DataTable", () => {
     });
   });
 
-  it("handles sorting", async () => {
+  test("handles sorting", async () => {
     render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const nameHeader = screen.getByText("Name");
@@ -56,7 +64,7 @@ describe("DataTable", () => {
     expect(cells[0]).toHaveTextContent("Bob Johnson");
   });
 
-  it("handles searching", async () => {
+  test("handles searching", async () => {
     render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const searchInput = screen.getByPlaceholderText("Search...");
@@ -66,7 +74,7 @@ describe("DataTable", () => {
     expect(screen.queryByText("Jane Smith")).not.toBeInTheDocument();
   });
 
-  it("handles row selection", async () => {
+  test("handles row selection", async () => {
     const onSelectionChange = vi.fn();
     render(
       <DataTable
@@ -84,7 +92,7 @@ describe("DataTable", () => {
     expect(onSelectionChange).toHaveBeenCalledWith([mockData[0]]);
   });
 
-  it("handles filtering", async () => {
+  test("handles filtering", async () => {
     render(<DataTable data={mockData} columns={columns} useTailwind={false} />);
 
     const filterButton = screen.getAllByLabelText(/Filter/)[0];
@@ -114,7 +122,14 @@ describe("DataTable", () => {
       status: i % 2 === 0 ? "active" : "inactive",
     }));
 
-    render(<DataTable data={largeData} columns={columns} pageSize={10} useTailwind={false} />);
+    render(
+      <DataTable
+        data={largeData}
+        columns={columns}
+        pageSize={10}
+        useTailwind={false}
+      />
+    );
 
     const nextButton = screen.getByLabelText("Next page");
     await userEvent.click(nextButton);
@@ -123,29 +138,45 @@ describe("DataTable", () => {
     expect(screen.queryByText("Person 1")).not.toBeInTheDocument();
   });
 
-  it("handles empty data state", () => {
+  test("handles empty data state", () => {
     render(
-      <DataTable data={[]} columns={columns} emptyMessage="No data available" useTailwind={false} />
+      <DataTable
+        data={[]}
+        columns={columns}
+        emptyMessage="No data available"
+        useTailwind={false}
+      />
     );
     expect(screen.getByText("No data available")).toBeInTheDocument();
   });
 
-  it("handles loading state", () => {
-    render(<DataTable data={mockData} columns={columns} loading={true} useTailwind={false} />);
+  test("handles loading state", () => {
+    render(
+      <DataTable
+        data={mockData}
+        columns={columns}
+        loading={true}
+        useTailwind={false}
+      />
+    );
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 
-  it("uses CSS by default", () => {
-    const { container } = render(<DataTable data={mockData} columns={columns} />);
-    const tableContainer = container.querySelector('.datatable-container');
-    expect(tableContainer).toHaveClass('use-css');
-    expect(tableContainer).not.toHaveClass('use-tailwind');
+  test("uses CSS by default", () => {
+    const { container } = render(
+      <DataTable data={mockData} columns={columns} />
+    );
+    const tableContainer = container.querySelector(".datatable-container");
+    expect(tableContainer).toHaveClass("use-css");
+    expect(tableContainer).not.toHaveClass("use-tailwind");
   });
 
-  it("uses Tailwind when useTailwind prop is true", () => {
-    const { container } = render(<DataTable data={mockData} columns={columns} useTailwind={true} />);
-    const tableContainer = container.querySelector('.datatable-container');
-    expect(tableContainer).toHaveClass('use-tailwind');
-    expect(tableContainer).not.toHaveClass('use-css');
+  test("uses Tailwind when useTailwind prop is true", () => {
+    const { container } = render(
+      <DataTable data={mockData} columns={columns} useTailwind={true} />
+    );
+    const tableContainer = container.querySelector(".datatable-container");
+    expect(tableContainer).toHaveClass("use-tailwind");
+    expect(tableContainer).not.toHaveClass("use-css");
   });
 });

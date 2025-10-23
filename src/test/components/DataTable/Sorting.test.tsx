@@ -1,5 +1,4 @@
-import { vi } from "vitest";
-import React from "react";
+import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockData, columns } from "../../mocks/tableData";
@@ -13,7 +12,7 @@ describe("DataTable Sorting", () => {
     useTailwind: false,
   };
 
-  it("sorts by default column and direction", () => {
+  test("sorts by default column and direction", () => {
     render(
       <DataTable
         {...defaultProps}
@@ -26,7 +25,7 @@ describe("DataTable Sorting", () => {
     expect(cells[0]).toHaveTextContent("Bob Johnson");
   });
 
-  it("handles column sort click", async () => {
+  test("handles column sort click", async () => {
     render(<DataTable {...defaultProps} />);
 
     const nameHeader = screen.getByText("Name");
@@ -40,7 +39,7 @@ describe("DataTable Sorting", () => {
     expect(cells[0]).toHaveTextContent("John Doe");
   });
 
-  it("disables sorting when sortable is false", async () => {
+  test("disables sorting when sortable is false", async () => {
     render(<DataTable {...defaultProps} sortable={false} />);
 
     const nameHeader = screen.getByText("Name");
